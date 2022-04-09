@@ -24,16 +24,20 @@ VkImageViewCreateInfo Image::CreateImageView(VkImage image, VkImageViewType view
 
 
 void Image::DestroyImageResources() {
+
     if(m_Sampler != VK_NULL_HANDLE) {
         vkDestroySampler(deviceRef.GetDevice(), m_Sampler, nullptr);
+        m_Sampler = VK_NULL_HANDLE;
     }
 
     if(m_Image != VK_NULL_HANDLE) {
         vkDestroyImage(deviceRef.GetDevice(), m_Image, nullptr);
+        m_Image = VK_NULL_HANDLE;
     }
 
     if(m_ImageView != VK_NULL_HANDLE) {
         vkDestroyImageView(deviceRef.GetDevice(), m_ImageView, nullptr);
+        m_ImageView = VK_NULL_HANDLE;
     }
 
     if(m_ImageMemory != VK_NULL_HANDLE) {
@@ -59,7 +63,7 @@ void Image::CreateSampler() {
     samplerInfo.unnormalizedCoordinates = VK_FALSE;
     samplerInfo.compareEnable = VK_FALSE;
     samplerInfo.compareOp = VK_COMPARE_OP_LESS_OR_EQUAL;
-    samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_LINEAR;
+    samplerInfo.mipmapMode = VK_SAMPLER_MIPMAP_MODE_NEAREST;
     samplerInfo.mipLodBias = 0.0f;
     samplerInfo.minLod = 0.0f;
     samplerInfo.maxLod = 0.0f;
@@ -67,7 +71,6 @@ void Image::CreateSampler() {
     if(vkCreateSampler(deviceRef.GetDevice(), &samplerInfo, nullptr, &m_Sampler) != VK_SUCCESS){
         throw std::runtime_error("failed to create sampler!");
     }
-
 }
 
 void Image::CreateImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties) 

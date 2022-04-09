@@ -5,7 +5,7 @@ void Buffer::DestroyBuffer() {
 
     std::cout << "Destroying and freeing buffers" << std::endl;
     if(!m_UniformBuffers.empty() && !m_UniformBufferMemory.empty()){
-        for(size_t i = 0; i < 2; i++){
+        for(size_t i = 0; i < m_UniformBuffers.size(); i++){
             vkDestroyBuffer(deviceRef.GetDevice(), m_UniformBuffers[i], nullptr);
             vkFreeMemory(deviceRef.GetDevice(), m_UniformBufferMemory[i], nullptr);
         }
@@ -81,7 +81,6 @@ void Buffer::CreateVertexBuffer(std::vector<Vertex> primitiveData) {
     
     vkDestroyBuffer(deviceRef.GetDevice(), tempBuffer, nullptr);
     vkFreeMemory(deviceRef.GetDevice(), tempBufferMemory, nullptr);
-
 }
 
 void Buffer::CreateUniformBuffer(VkDeviceSize size, size_t resize) {

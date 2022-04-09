@@ -1,5 +1,11 @@
 #version 450
 
+/*
+Based on jhk2 hbao implementation
+(jhk2, 2019)
+https://github.com/jhk2/glsandbox/blob/master/kgl/samples/ao/hbao.glsl
+*/
+
 layout(binding = 0) uniform SSAOubo {
 	vec4 samples[64];
 	int sample_amount;
@@ -68,11 +74,13 @@ vec4 depthToNormal(vec2 tc)
     return vec4(n, 1.0);
 }
 
+//(Kubisch, 2015)
 vec2 RotateDirection(vec2 Dir, vec2 CosSin)
 {
     return vec2(Dir.x*CosSin.x - Dir.y*CosSin.y, Dir.x*CosSin.y + Dir.y*CosSin.x);
 }
 
+//(Kubisch, 2015)
 vec4 GetJitter()
 {
     return textureLod(texNoise, (gl_FragCoord.xy / 4), 0);
@@ -85,7 +93,7 @@ void main()
     vec3 pos = vec3(uvCoords, texture(depthMap, uvCoords).r);
     
     vec4 normal = depthToNormal(uvCoords);
-    //normal.y = -normal.y;
+    normal.y = -normal.y;
     //normal.x = -normal.x;
 
     vec3 NDC_POS = (2.0 * pos) - 1.0; // normalized device coordinates

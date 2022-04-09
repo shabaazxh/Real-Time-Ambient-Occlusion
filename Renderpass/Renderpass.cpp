@@ -2,7 +2,11 @@
 
 
 void Renderpass::DestroyRenderpass() {
-    vkDestroyRenderPass(deviceRef.GetDevice(), m_Renderpass, nullptr);
+    if (m_Renderpass != VK_NULL_HANDLE)
+    {
+        vkDestroyRenderPass(deviceRef.GetDevice(), m_Renderpass, nullptr);
+        m_Renderpass = VK_NULL_HANDLE;
+    }
 }
 
 VkAttachmentDescription Renderpass::createAttachment(VkFormat format, VkImageLayout initialLayout, VkImageLayout finalLayout, VkAttachmentLoadOp loadOp) {

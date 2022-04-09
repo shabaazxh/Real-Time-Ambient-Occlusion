@@ -7,10 +7,10 @@
 #include "Memory.h"
 #include <stdexcept>
 #include <cmath>
+#include <iostream>
 
 class Image {
     public:
-        Image() = default;
         Image(Device& deviceRef) : deviceRef{deviceRef} {}
         void DestroyImageResources();
 

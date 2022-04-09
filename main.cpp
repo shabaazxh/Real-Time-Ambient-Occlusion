@@ -440,11 +440,9 @@ class MirrorVulkanApp {
     void cleanup()
     {
         swapChain->DestroySwapChain();
-        Render->DestroyRendererResources();
         descriptorPool->DestroyDescriptorPool();
-        ImGuiDescriptorPool->DestroyDescriptorPool();
 
-        commandPool->DestroyCommandPool();
+        RenderData::depthResources.Destroy(*vkDevice);
 
         // Destroy Image resources
         positionImage->DestroyImageResources();
@@ -476,7 +474,6 @@ class MirrorVulkanApp {
         SSAOFramebuffer->DestroyFramebuffer();
         SSAOBlurAOFramebuffer->DestroyFramebuffer();
         LightingPassFramebuffer->DestroyFramebuffer();
-        swapChain->DestroySwapChain();
 
         // pipelines
         GBufferPipeline->DestroyPipelineResources();
@@ -486,6 +483,7 @@ class MirrorVulkanApp {
         AlchemyPipeline->DestroyPipelineResources();
         SSAOBlurPipeline->DestroyPipelineResources();
         LightPassPipeline->DestroyPipelineResources();
+        DisplayQuad->DestroyPipelineResources();
 
         // Render pass
         SwapChainRenderPass->DestroyRenderpass();
@@ -496,7 +494,12 @@ class MirrorVulkanApp {
         SSAOBlurRenderpass->DestroyRenderpass();
         LightingPassRenderpass->DestroyRenderpass();
 
-        
+        Render->DestroyRendererResources();
+        commandPool->DestroyCommandPool();
+        ImGuiDescriptorPool->DestroyDescriptorPool();
+
+        ImGui_ImplVulkan_Shutdown();
+                
         vkDevice->DestroyDevice();
         Window.DestroySurface(instance);
         vkDestroyInstance(instance, nullptr);
