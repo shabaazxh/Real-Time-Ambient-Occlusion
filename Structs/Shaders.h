@@ -79,6 +79,7 @@ struct Light {
     alignas(16) glm::vec4 LightColor;
     alignas(16) glm::vec4 LightViewPosition;
     alignas(16) glm::mat4 LightSpaceMatrix;
+    alignas(16) glm::vec4 CameraPosition;
 };
 
 struct SSAOubo {

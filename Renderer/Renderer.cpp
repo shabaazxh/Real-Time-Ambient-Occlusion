@@ -164,6 +164,7 @@ void Renderer::UpdateUniforms(uint32_t currentImage) {
     Light.LightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     Light.ObjectColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     Light.LightPosition.x = 1.0f + sin(glfwGetTime()) * 2.0f;
+    Light.CameraPosition = glm::vec4(CameraController.GetCameraPos(), 1.0);
     //Light.LightPosition.y = sin(glfwGetTime() / 2.0f) * 1.0f;
 
     //glm::mat4 LightProjection = glm::ortho(-10.0f, 10.0f, 10.0f, -10.0f, 1.0f, 7.5f);

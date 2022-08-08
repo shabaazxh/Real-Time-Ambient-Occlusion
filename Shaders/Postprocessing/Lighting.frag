@@ -6,6 +6,7 @@ layout(binding = 0) uniform Light {
     vec4 LightColor;
     vec4 LightViewPosition;
     mat4 LightSpaceMatrix;
+    vec4 CameraPosition;
 }light;
 
 layout(binding = 4) uniform CameraProjection {
@@ -75,13 +76,21 @@ void main() {
     float ambientValue = (0.3 * 1.0 * AO);
     vec3 ambient = ambientValue * light.LightColor.xyz;
 
-    vec3 lightingDirection = normalize(light.LightPosition.xyz - FragPos);
+    vec3 lightingDirection = normalize(light.LightPosition.xyz - FragPos.xyz);
     float diffCalc = max(dot(Normal, lightingDirection), 0.0);
     vec3 diffuse = diffCalc * light.LightColor.xyz;
 
+    //specular
+    float specularStrength = 0.5; 
+    vec4 cameraPosition = vec4(camera.view * light.CameraPosition);   
+    vec3 viewDir = normalize(cameraPosition.xyz - FragPos.xyz);
+    vec3 reflectDir = reflect(-lightingDirection, Normal.xyz);
+    float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+    vec3 specular = specularStrength * spec * light.LightColor.xyz;
+
     float shadow = Shadow(FragPosLightSpace);
 
-    vec3 result = (ambient + (1.0 - shadow) * diffuse) * light.ObjectColor.xyz;
+    vec3 result = (ambient + (1.0 - shadow) * (diffuse + specular)) * light.ObjectColor.xyz;
     outColor = vec4(result, 1.0);
 
 }
