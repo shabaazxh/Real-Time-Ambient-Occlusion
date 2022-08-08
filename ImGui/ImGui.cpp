@@ -1,7 +1,7 @@
 #include "ImGui.h"
 
 
-
+// Init ImGui for Vulkan : implemented simplified approach following ImGui vulkan example 
 void UI::InitImGui(VkDescriptorPool ImGuiDescriptorPool, VkRenderPass renderPass, VkCommandPool commandPool) {
 
     IMGUI_CHECKVERSION();
@@ -46,7 +46,11 @@ void UI::drawImGui(std::vector<VkFramebuffer> swapChainFramebuffers, VkExtent2D 
     if(AOSettingsWindow)
     {
         ImGui::Begin("AOSettings: ", &AOSettingsWindow, 0);
-        ImGui::Text("Frametime: %f", 1000.0f / ImGui::GetIO().Framerate);
+        //ImGui::Text("Frametime: %f", 1000.0f / ImGui::GetIO().Framerate);
+        ImGui::Text("WSAD keys to move camera");
+        ImGui::Text("L to lock camera");
+        ImGui::Text("U to unlock camera");
+        ImGui::Text("Esc to exit application.");
 
         switch(Settings::AOStateController)
         {
@@ -70,17 +74,18 @@ void UI::drawImGui(std::vector<VkFramebuffer> swapChainFramebuffers, VkExtent2D 
             case Settings::AOState::AAO:
             {
                 ImGui::SliderFloat("Radius", &SSAOuboController::radius, 0, 2.0);
-                ImGui::SliderInt("SampleTurns", &SSAOuboController::alchemySampleTurns, 0, 64);
+                ImGui::SliderInt("Samples", &SSAOuboController::samples, 0, 64);
                 ImGui::SliderFloat("Sigma", &SSAOuboController::alchemySigma, 0, 2.0);
                 ImGui::SliderFloat("Kappa", &SSAOuboController::alchemyKappa, 0, 5.0);
                 break;
             }
         }
         
-        if(ImGui::RadioButton("SSAO", Settings::AOStateController == Settings::AOState::SSAO)) { Settings::AOStateController = Settings::AOState::SSAO; ImGui::SameLine(); }
+        if(ImGui::RadioButton("Crytek SSAO", Settings::AOStateController == Settings::AOState::SSAO)) { Settings::AOStateController = Settings::AOState::SSAO; ImGui::SameLine(); }
         if(ImGui::RadioButton("HBAO", Settings::AOStateController == Settings::AOState::HBAO)) { Settings::AOStateController = Settings::AOState::HBAO; ImGui::SameLine();}
         if(ImGui::RadioButton("AAO", Settings::AOStateController == Settings::AOState::AAO)) { Settings::AOStateController = Settings::AOState::AAO; ImGui::SameLine();}
         ImGui::Checkbox("Blur", &RenderPresentSettingsController::enableBlur);
+        ImGui::Checkbox("Light", &RenderPresentSettingsController::enableLight);
         ImGui::End();
     }
 

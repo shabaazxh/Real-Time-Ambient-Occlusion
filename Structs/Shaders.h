@@ -57,13 +57,13 @@ struct Vertex {
 };
 
 struct Primitives {
-    std::vector<Vertex> Triangle = {
-    {{-1.0f, -1.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
-    {{1.0f, -1.0f, 0.0f}, {0.0f, 1.0f, 0.0f},  {1.0f, 0.0f}},
-    {{1.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f},   {1.0f, 1.0f}},
-    {{-1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f},  {0.0f, 1.0f}},
-    {{-1.0f, -1.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
-    {{1.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f},   {1.0f, 1.0f}},
+    std::vector<Vertex> Quad = {
+        {{-1.0f, -1.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
+        {{1.0f, -1.0f, 0.0f}, {0.0f, 1.0f, 0.0f},  {1.0f, 0.0f}},
+        {{1.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f},   {1.0f, 1.0f}},
+        {{-1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 0.0f},  {0.0f, 1.0f}},
+        {{-1.0f, -1.0f, 0.0f}, {1.0f, 0.0f, 0.0f}, {0.0f, 0.0f}},
+        {{1.0f, 1.0f, 0.0f}, {0.0f, 0.0f, 1.0f},   {1.0f, 1.0f}},
     };
 };
 
@@ -91,21 +91,21 @@ struct SSAOubo {
     alignas(4) int hbaoNumberOfSteps;
     alignas(4) float hbaoAmbientLightLevel;
 
-    alignas(4) int alchemySampleTurns;
     alignas(4) float alchemySigma;
     alignas(4) float alchemyKappa;
+
+    alignas(4) float time;
 };
 
 struct SSAOuboController {
-    inline static int samples;
-    inline static float radius;
+    inline static int samples = 12;
+    inline static float radius = 0.063f;
 
-    inline static int hbaoSampleDirection;
-    inline static float hbaoSteps;
-    inline static int hbaoNumberOfSteps;
-    inline static float hbaoAmbientLightLevel;
+    inline static int hbaoSampleDirection = 6;
+    inline static float hbaoSteps = 0.004f;
+    inline static int hbaoNumberOfSteps = 6;
+    inline static float hbaoAmbientLightLevel = 1.746f;
 
-    inline static int alchemySampleTurns;
     inline static float alchemySigma;
     inline static float alchemyKappa;
 };
@@ -117,7 +117,7 @@ struct RenderPresentSettings {
 
 struct RenderPresentSettingsController {
     inline static bool enableBlur = true;
-    inline static bool enableLight = false;
+    inline static bool enableLight = true;
 };
 
 inline float Lerp(float a, float b, float f) {

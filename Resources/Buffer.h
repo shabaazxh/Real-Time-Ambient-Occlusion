@@ -16,7 +16,7 @@ class Buffer {
     void DestroyBuffer();
     void CreateVertexBuffer(std::vector<Vertex> primitiveData);
     void CreateBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory);
-    void CopyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
+    void CopyBufferContents(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
     void CreateUniformBuffer(VkDeviceSize size, size_t resize);
    
     VkBuffer GetBuffer() const { return m_Buffer; }

@@ -26,7 +26,7 @@ class Renderer {
             MouseControls = &CameraController;
         }
     void CreateSync();
-    void Drawframe();
+    void Renderframe();
     void UpdateUniforms(uint32_t currentImage);
     void RecordCommandbuffer(uint32_t currentFrame, uint32_t imageIndex);
     void UpdateCamera();

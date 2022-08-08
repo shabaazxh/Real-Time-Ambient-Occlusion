@@ -3,23 +3,13 @@
 #include <iostream>
 #include <GLFW/glfw3.h>
 #include "libs/glm/glm.hpp"
-#include "libs/glm/gtc/matrix_transform.hpp"
-#include "libs/glm/gtx/hash.hpp"
-#define STB_IMAGE_IMPLEMENTATION
-#include "libs/stb_image.h"
 
 //std
 #include <iostream>
 #include <stdexcept>
 #include <vector>
-#include <cstring>
-#include <cstdlib>
 #include <cstdint>
-#include <algorithm>
-#include <array>
-#include <chrono>
 #include <memory>
-#include <random>
 
 #include "Device/Device.h"
 #include "Validation.h"
@@ -42,16 +32,16 @@ const uint32_t WIDTH = 1920;
 const uint32_t HEIGHT = 1080;
 
 
-class MirrorVulkanApp {
+class VulkanApp {
     public:
-    MirrorVulkanApp(bool ValidationLayers){
+    VulkanApp(bool ValidationLayers){
         validationLayers.enableValidationLayers = ValidationLayers;
     }
     void run() {
         initWindow();
         initVulkan();
         mainLoop();
-        cleanup();
+        CleanUpResources();
     }
     VkInstance instance;
     private:
@@ -71,6 +61,7 @@ class MirrorVulkanApp {
     std::unique_ptr<Pipeline> SSAOBlurPipeline;
     std::unique_ptr<Pipeline> LightPassPipeline;
     std::unique_ptr<Pipeline> DisplayQuad;
+    std::unique_ptr<Pipeline> ShadowPipeline;
    
     std::unique_ptr<Renderpass> SwapChainRenderPass;
     std::unique_ptr<Renderpass> GBufferRenderPass;
@@ -79,6 +70,7 @@ class MirrorVulkanApp {
     std::unique_ptr<Renderpass> ImGuiRenderpass;
     std::unique_ptr<Renderpass> SSAOBlurRenderpass;
     std::unique_ptr<Renderpass> LightingPassRenderpass;
+    std::unique_ptr<Renderpass> ShadowMapRenderpass;
 
     std::unique_ptr<Buffer> ModelBuffer;
     std::unique_ptr<Buffer> SSAOBuffer;
@@ -91,6 +83,7 @@ class MirrorVulkanApp {
     std::unique_ptr<Framebuffer> SponzaSceneFramebuffer;
     std::unique_ptr<Framebuffer> SSAOBlurAOFramebuffer;
     std::unique_ptr<Framebuffer> LightingPassFramebuffer;
+    std::unique_ptr<Framebuffer> ShadowMapFramebuffer;
 
     std::unique_ptr<DescriptorPool> descriptorPool;
     std::unique_ptr<DescriptorPool> ImGuiDescriptorPool;
@@ -110,13 +103,14 @@ class MirrorVulkanApp {
     std::unique_ptr<Image> SponzaSceneRenderedImage;
     std::unique_ptr<Image> SSAOBlurRenderImage;
     std::unique_ptr<Image> LightingPassImage;
+    std::unique_ptr<Image> ShadowMapImage;
 
     std::unique_ptr<UI> ImGuiUI;    
     std::unique_ptr<Camera> CameraController;
     std::vector<glm::vec4> ssaoNoise;
     void initWindow()
     {
-        Window.CreateWindow(WIDTH, HEIGHT, "Vulkan");
+        Window.CreateWindow(WIDTH, HEIGHT, "Vulkan - Ambient Occlusion");
     }
 
     void initVulkan()
@@ -142,12 +136,12 @@ class MirrorVulkanApp {
 
             VkAttachmentDescription sceneRenderColorAttachment = Renderpass::createAttachment(swapChain->GetSwapChainFormat(), VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR);
             SponzaSceneRenderpass = std::make_unique<Renderpass>(*vkDevice);
-            SponzaSceneRenderpass->CreateRenderpass({sceneRenderColorAttachment, depthAttachment}, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+            SponzaSceneRenderpass->CreateRenderpass({sceneRenderColorAttachment, depthAttachment}, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, true);
 
             VkAttachmentDescription positionImageColorAttachment = Renderpass::createAttachment(VK_FORMAT_R32G32B32A32_SFLOAT, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR);
             VkAttachmentDescription normalImageColorAttachment = Renderpass::createAttachment(VK_FORMAT_R32G32B32A32_SFLOAT, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR);
             GBufferRenderPass = std::make_unique<Renderpass>(*vkDevice);
-            GBufferRenderPass->CreateRenderpass({positionImageColorAttachment, normalImageColorAttachment, depthAttachment}, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL);
+            GBufferRenderPass->CreateRenderpass({positionImageColorAttachment, normalImageColorAttachment, depthAttachment}, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, true);
 
             VkAttachmentDescription ssaoColorAttachment = Renderpass::createAttachment(VK_FORMAT_R16G16B16A16_SFLOAT, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR);
             SSAORenderpass = std::make_unique<Renderpass>(*vkDevice);
@@ -168,6 +162,10 @@ class MirrorVulkanApp {
 
             LightingPassRenderpass = std::make_unique<Renderpass>(*vkDevice);
             LightingPassRenderpass->CreateRenderpass({sceneRenderColorAttachment});
+
+            VkAttachmentDescription shadowDepthAttachment = Renderpass::createAttachment(RenderData::depthResources.DepthFormat, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_ATTACHMENT_LOAD_OP_CLEAR);
+            ShadowMapRenderpass = std::make_unique<Renderpass>(*vkDevice);
+            ShadowMapRenderpass->CreateShadowRenderpass({shadowDepthAttachment}, VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL, false);
         }
         
         // Image resources
@@ -205,6 +203,10 @@ class MirrorVulkanApp {
             LightingPassImage->CreateImageResource(swapChain->GetSwapChainExtent().width, swapChain->GetSwapChainExtent().height, swapChain->GetSwapChainFormat(),VK_IMAGE_TILING_OPTIMAL,
             VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, VK_IMAGE_ASPECT_COLOR_BIT);
 
+            ShadowMapImage = std::make_unique<Image>(*vkDevice);
+            ShadowMapImage->CreateImageResource(2048, 2048, RenderData::depthResources.DepthFormat, VK_IMAGE_TILING_OPTIMAL, 
+            VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT | VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL, VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT, VK_IMAGE_ASPECT_DEPTH_BIT);
+
         }
 
         // Framebuffers
@@ -225,14 +227,10 @@ class MirrorVulkanApp {
 
             LightingPassFramebuffer = std::make_unique<Framebuffer>(*vkDevice);
             LightingPassFramebuffer->CreateFramebuffer({LightingPassImage->GetImageView()}, LightingPassRenderpass->GetRenderpass(), swapChain->GetSwapChainExtent(), false);
+
+            ShadowMapFramebuffer = std::make_unique<Framebuffer>(*vkDevice);
+            ShadowMapFramebuffer->CreateFramebuffer({ShadowMapImage->GetImageView()}, ShadowMapRenderpass->GetRenderpass(), {2048, 2048}, false);
         }
-
-        // Transition images and generating mip maps
-        positionImage->TransitionImageLayout(commandPool->GetCommandPool(), positionImage->GetImage(), VK_FORMAT_R32G32B32A32_SFLOAT, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
-        positionImage->GenerateMipmaps(positionImage->GetImage(), VK_FORMAT_R32G32B32A32_SFLOAT, swapChain->GetSwapChainExtent().width, swapChain->GetSwapChainExtent().height, commandPool->GetCommandPool());
-
-        normalImage->TransitionImageLayout(commandPool->GetCommandPool(), normalImage->GetImage(), VK_FORMAT_R32G32B32A32_SFLOAT, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
-        normalImage->GenerateMipmaps(normalImage->GetImage(), VK_FORMAT_R32G32B32A32_SFLOAT, swapChain->GetSwapChainExtent().width, swapChain->GetSwapChainExtent().height, commandPool->GetCommandPool());
 
         descriptorPool = std::make_unique<DescriptorPool>(*vkDevice);
         VkDescriptorPoolSize uniformBuffers = DefinePoolSize(VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, 20);
@@ -249,19 +247,20 @@ class MirrorVulkanApp {
 
         // Buffers
         {
-            Model SponzaModel("C:/Users/Shahb/Desktop/m/Assets/Sponza.obj");
+            Model SponzaModel("Assets/CubeFloor.obj");
             ModelBuffer = std::make_unique<Buffer>(commandPool->GetCommandPool(), *vkDevice);
             ModelBuffer->CreateVertexBuffer(SponzaModel.GetVertexData());
             ModelBuffer->CreateUniformBuffer(sizeof(CameraProjection), swapChain->GetSwapChainImages().size());
 
             SSAOBuffer = std::make_unique<Buffer>(commandPool->GetCommandPool(), *vkDevice);
             SSAOBuffer->CreateUniformBuffer(sizeof(SSAOubo), swapChain->GetSwapChainImages().size());
+            
             SSAOQuadBuffer = std::make_unique<Buffer>(commandPool->GetCommandPool(), *vkDevice);
             SSAOQuadBuffer->CreateUniformBuffer(sizeof(CameraProjection), swapChain->GetSwapChainImages().size());
-            SSAOQuadBuffer->CreateVertexBuffer(primitives.Triangle);
+            SSAOQuadBuffer->CreateVertexBuffer(primitives.Quad);
 
             DisplayQuadBuffer = std::make_unique<Buffer>(commandPool->GetCommandPool(), *vkDevice);
-            DisplayQuadBuffer->CreateVertexBuffer(primitives.Triangle);
+            DisplayQuadBuffer->CreateVertexBuffer(primitives.Quad);
             DisplayQuadBuffer->CreateUniformBuffer(sizeof(RenderPresentSettings), swapChain->GetSwapChainImages().size());
 
             LightBuffer = std::make_unique<Buffer>(commandPool->GetCommandPool(), *vkDevice);
@@ -278,7 +277,7 @@ class MirrorVulkanApp {
             RenderData::ssaoRenderData.UniformMemory = SSAOBuffer->GetUniformBufferMemory();
             RenderData::ssaoRenderData.cameraUniformBuffers = SSAOQuadBuffer->GetUniformBuffers();
             RenderData::ssaoRenderData.cameraUniformMemory = SSAOQuadBuffer->GetUniformBufferMemory();
-            RenderData::ssaoRenderData.vertexData = primitives.Triangle;
+            RenderData::ssaoRenderData.vertexData = primitives.Quad;
             RenderData::ssaoRenderData.vertexBuffer = SSAOQuadBuffer->GetBuffer();
             RenderData::ssaoRenderData.renderpass = SSAORenderpass->GetRenderpass();
             RenderData::ssaoRenderData.framebuffer = SSAOFramebuffer->GetFramebuffer();
@@ -294,11 +293,14 @@ class MirrorVulkanApp {
             RenderData::Lighting.framebuffer = LightingPassFramebuffer->GetFramebuffer();
             RenderData::Lighting.renderpass = LightingPassRenderpass->GetRenderpass();
 
+            RenderData::Shadow.framebuffer = ShadowMapFramebuffer->GetFramebuffer();
+            RenderData::Shadow.renderpass = ShadowMapRenderpass->GetRenderpass();
+
             RenderData::DisplayQuad.vertexBuffer = DisplayQuadBuffer->GetBuffer();
-            RenderData::DisplayQuad.vertexData = primitives.Triangle;
+            RenderData::DisplayQuad.vertexData = primitives.Quad;
             RenderData::DisplayQuad.UniformBuffers = DisplayQuadBuffer->GetUniformBuffers();
             RenderData::DisplayQuad.UniformMemory = DisplayQuadBuffer->GetUniformBufferMemory();
-
+            
             GenerateSSAONoise(*noiseTextureImage, VK_FORMAT_R32G32B32A32_SFLOAT, ssaoNoise, commandPool->GetCommandPool(), *vkDevice);    
 
         }
@@ -320,31 +322,37 @@ class MirrorVulkanApp {
             VkPipelineColorBlendStateCreateInfo GBufferColorBlending = Pipeline::colorBlending(GBufferColorBlendAttachments);
 
             GBufferPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-            GBufferPipeline->CreateGraphicsPipeline("C:/Users/Shahb/Desktop/m/Shaders/GBuffer/gbuffervert.spv", "C:/Users/Shahb/Desktop/m/Shaders/GBuffer/gbufferfrag.spv", inputAssembly, viewport, scissor, rasterizer, multisampling, GBufferColorBlending, GBufferRenderPass->GetRenderpass(), uboDescriptorLayout->GetDescriptorSetLayout(), true);
+            GBufferPipeline->CreateGraphicsPipeline("Shaders/GBuffer/gbuffervert.spv", "Shaders/GBuffer/gbufferfrag.spv", inputAssembly, viewport, scissor, rasterizer, multisampling, GBufferColorBlending, GBufferRenderPass->GetRenderpass(), uboDescriptorLayout->GetDescriptorSetLayout(), true);
 
             SponzaGraphicsPipline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-            SponzaGraphicsPipline->CreateGraphicsPipeline("C:/Users/Shahb/Desktop/m/Shaders/basevert.spv", "C:/Users/Shahb/Desktop/m/Shaders/basefrag.spv", inputAssembly, viewport, scissor, rasterizer, multisampling, colorBlending, SponzaSceneRenderpass->GetRenderpass(), uboDescriptorLayout->GetDescriptorSetLayout(), true);
+            SponzaGraphicsPipline->CreateGraphicsPipeline("Shaders/basevert.spv", "Shaders/basefrag.spv", inputAssembly, viewport, scissor, rasterizer, multisampling, colorBlending, SponzaSceneRenderpass->GetRenderpass(), uboDescriptorLayout->GetDescriptorSetLayout(), true);
 
             std::vector<VkPipelineColorBlendAttachmentState> ssaoBlendState  = {Pipeline::blendState(VK_FALSE, VK_BLEND_FACTOR_ONE, VK_BLEND_FACTOR_ZERO)};
             VkPipelineColorBlendStateCreateInfo ssaocolorBlending = Pipeline::colorBlending(ssaoBlendState);
             SSAOPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-            SSAOPipeline->CreateGraphicsPipeline("C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/SSAOvert.spv", "C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/SSAOfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
+            SSAOPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/SSAOvert.spv", "Shaders/Postprocessing/SSAOfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
 
             HBAOPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-            HBAOPipeline->CreateGraphicsPipeline("C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/SSAOvert.spv", "C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/HBAO.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
+            HBAOPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/SSAOvert.spv", "Shaders/Postprocessing/HBAO.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
 
             AlchemyPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-            AlchemyPipeline->CreateGraphicsPipeline("C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/SSAOvert.spv", "C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/AlchemyAO.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
+            AlchemyPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/SSAOvert.spv", "Shaders/Postprocessing/AlchemyAO.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
 
             SSAOBlurPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-            SSAOBlurPipeline->CreateGraphicsPipeline("C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/Quadvert.spv", "C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/Blur.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAOBlurRenderpass->GetRenderpass(), SSAOBlurDescriptorLayout->GetDescriptorSetLayout(), true);
+            SSAOBlurPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/Quadvert.spv", "Shaders/Postprocessing/Blur.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAOBlurRenderpass->GetRenderpass(), SSAOBlurDescriptorLayout->GetDescriptorSetLayout(), true);
 
             LightPassPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-            LightPassPipeline->CreateGraphicsPipeline("C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/Quadvert.spv", "C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/Lightingfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, colorBlending, LightingPassRenderpass->GetRenderpass(), LightingPassDescriptorLayout->GetDescriptorSetLayout(), true);
+            LightPassPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/Lightingvert.spv", "Shaders/Postprocessing/Lightingfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, colorBlending, LightingPassRenderpass->GetRenderpass(), LightingPassDescriptorLayout->GetDescriptorSetLayout(), true);
+
+            VkExtent2D extent = {2048, 2048};
+            VkViewport shadowViewport = Pipeline::viewport({2048, 2048});
+            VkRect2D shadowScissor = Pipeline::scissor({2048, 2048});
+            ShadowPipeline = std::make_unique<Pipeline>(*vkDevice, extent);
+            ShadowPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/Shadow.vert.spv", "Shaders/Postprocessing/Shadow.frag.spv", inputAssembly, shadowViewport, shadowScissor, overlayRasterizer, multisampling, colorBlending, ShadowMapRenderpass->GetRenderpass(), LightingPassDescriptorLayout->GetDescriptorSetLayout(), true);
 
             // Display Quad is final swapchain present 
             DisplayQuad = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-            DisplayQuad->CreateGraphicsPipeline("C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/Quadvert.spv", "C:/Users/Shahb/Desktop/m/Shaders/Postprocessing/Quadfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, colorBlending, SwapChainRenderPass->GetRenderpass(), DisplayDescriptorLayout->GetDescriptorSetLayout(), true);
+            DisplayQuad->CreateGraphicsPipeline("Shaders/Postprocessing/Quadvert.spv", "Shaders/Postprocessing/Quadfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, colorBlending, SwapChainRenderPass->GetRenderpass(), DisplayDescriptorLayout->GetDescriptorSetLayout(), true);
 
             RenderData::SponzaData.pipeline = SponzaGraphicsPipline->GetGraphicsPipeline();
             RenderData::SponzaData.pipelineLayout = SponzaGraphicsPipline->GetPipelineLayout();
@@ -366,6 +374,9 @@ class MirrorVulkanApp {
             RenderData::DisplayQuad.pipeline = DisplayQuad->GetGraphicsPipeline();
             RenderData::DisplayQuad.pipelineLayout = DisplayQuad->GetPipelineLayout();
 
+            RenderData::Shadow.pipeline = ShadowPipeline->GetGraphicsPipeline();
+            RenderData::Shadow.pipelineLayout = ShadowPipeline->GetPipelineLayout();
+
         }
         
         Commandbuffer renderingCommands(*vkDevice, commandPool->GetCommandPool());
@@ -377,10 +388,12 @@ class MirrorVulkanApp {
         Render->CreateSync();
         
     }
-
+    // Generate the noise texture containing random vectors for SSAO
     void GenerateSSAONoise(Image& image, VkFormat format, std::vector<glm::vec4>& ssaoNoise, VkCommandPool commandPool, Device& deviceRef) {
 
         VkDeviceSize noiseImageSize = 4*4*4*sizeof(float);
+        
+        // Noise generation implemented following (Joey De Vries, 2020) implementation.
         std::uniform_real_distribution<float> randomFloats(0.0, 1.0);
         std::default_random_engine generator;
 
@@ -411,7 +424,7 @@ class MirrorVulkanApp {
         vkDestroyBuffer(deviceRef.GetDevice(), tempStagingBuffer, nullptr);
         vkFreeMemory(deviceRef.GetDevice(), tempStagingBufferMemory, nullptr);
 
-        VkImageViewCreateInfo imageView =  Image::CreateImageView(image.GetImage(), VK_IMAGE_VIEW_TYPE_2D, VK_FORMAT_R32G32B32A32_SFLOAT, VK_IMAGE_ASPECT_COLOR_BIT, 1);
+        VkImageViewCreateInfo imageView =  Image::CreateImageView(image.GetImage(), VK_IMAGE_VIEW_TYPE_2D, VK_FORMAT_R32G32B32A32_SFLOAT, VK_IMAGE_ASPECT_COLOR_BIT);
 
         VkImageView view = image.GetImageView();
 
@@ -423,21 +436,21 @@ class MirrorVulkanApp {
 
         tempBuffer.DestroyBuffer();
     }
-
+    // Call events that need to be updated every frame
     void mainLoop() 
     {
         while(!glfwWindowShouldClose(Window.GetWindow()))
         {
             glfwSetCursorPosCallback(Window.GetWindow(), &MouseCallback);
             Render->UpdateCamera();
-            Render->Drawframe();
+            Render->Renderframe();
             glfwPollEvents();
         }
 
         vkDeviceWaitIdle(vkDevice->GetDevice());
     }
 
-    void cleanup()
+    void CleanUpResources()
     {
         swapChain->DestroySwapChain();
         descriptorPool->DestroyDescriptorPool();
@@ -453,6 +466,7 @@ class MirrorVulkanApp {
         SponzaSceneRenderedImage->DestroyImageResources();
         SSAOBlurRenderImage->DestroyImageResources();
         LightingPassImage->DestroyImageResources();
+        ShadowMapImage->DestroyImageResources();
 
         // DescriptorSetLayouts
         uboDescriptorLayout->DestroyDescriptorSetLayout();
@@ -474,6 +488,7 @@ class MirrorVulkanApp {
         SSAOFramebuffer->DestroyFramebuffer();
         SSAOBlurAOFramebuffer->DestroyFramebuffer();
         LightingPassFramebuffer->DestroyFramebuffer();
+        ShadowMapFramebuffer->DestroyFramebuffer();
 
         // pipelines
         GBufferPipeline->DestroyPipelineResources();
@@ -483,6 +498,7 @@ class MirrorVulkanApp {
         AlchemyPipeline->DestroyPipelineResources();
         SSAOBlurPipeline->DestroyPipelineResources();
         LightPassPipeline->DestroyPipelineResources();
+        ShadowPipeline->DestroyPipelineResources();
         DisplayQuad->DestroyPipelineResources();
 
         // Render pass
@@ -493,6 +509,7 @@ class MirrorVulkanApp {
         ImGuiRenderpass->DestroyRenderpass();
         SSAOBlurRenderpass->DestroyRenderpass();
         LightingPassRenderpass->DestroyRenderpass();
+        ShadowMapRenderpass->DestroyRenderpass();
 
         Render->DestroyRendererResources();
         commandPool->DestroyCommandPool();
@@ -507,7 +524,7 @@ class MirrorVulkanApp {
         glfwTerminate();
     }
 
-    
+    // Set up the descriptor sets data
     void SetUpDescriptorSets() {
         // Sponza
         std::vector<VkDescriptorSetLayoutBinding> SponzaBindings =
@@ -525,7 +542,7 @@ class MirrorVulkanApp {
             CreateDescriptorBinding(1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
             CreateDescriptorBinding(2, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
             CreateDescriptorBinding(3, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
-            CreateDescriptorBinding(4, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_FRAGMENT_BIT)
+            CreateDescriptorBinding(4, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT)
          };
         SSAOuboDescriptorLayout = std::make_unique<DescriptorLayout>(*vkDevice, SSAOBindings);
         DesciptorSetAllocate SSAOuboDescriptorSetAllocate(*vkDevice, descriptorPool->GetDescriptorPool(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), RenderData::ssaoRenderData.descriptorSets, 3); //Allocate descriptors using layout
@@ -547,15 +564,25 @@ class MirrorVulkanApp {
         // Light
         std::vector<VkDescriptorSetLayoutBinding> LightPassBinding =
         {
-            CreateDescriptorBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_FRAGMENT_BIT),
+            CreateDescriptorBinding(0, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_FRAGMENT_BIT | VK_SHADER_STAGE_VERTEX_BIT),
             CreateDescriptorBinding(1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
-            CreateDescriptorBinding(2, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT)
+            CreateDescriptorBinding(2, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
+            CreateDescriptorBinding(3, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
+            CreateDescriptorBinding(4, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_FRAGMENT_BIT | VK_SHADER_STAGE_VERTEX_BIT),
+            CreateDescriptorBinding(5, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
+            CreateDescriptorBinding(6, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT)
+
+
         };
         LightingPassDescriptorLayout = std::make_unique<DescriptorLayout>(*vkDevice, LightPassBinding);
         DesciptorSetAllocate LightinguboDescriptorSetAllocate(*vkDevice, descriptorPool->GetDescriptorPool(), LightingPassDescriptorLayout->GetDescriptorSetLayout(), RenderData::Lighting.descriptorSets, 3);
         UpdateDescriptorSet(0, *vkDevice, RenderData::Lighting.UniformBuffers, RenderData::Lighting.descriptorSets, sizeof(Light), VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER);
         UpdateDescriptorSet(1, *vkDevice, RenderData::Lighting.descriptorSets, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, positionImage->GetImageView(), noiseTextureImage->GetSampler(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         UpdateDescriptorSet(2, *vkDevice, RenderData::Lighting.descriptorSets, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, normalImage->GetImageView(), noiseTextureImage->GetSampler(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        UpdateDescriptorSet(3, *vkDevice, RenderData::Lighting.descriptorSets, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, ShadowMapImage->GetImageView(), noiseTextureImage->GetSampler(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        UpdateDescriptorSet(4, *vkDevice, RenderData::ssaoRenderData.cameraUniformBuffers, RenderData::Lighting.descriptorSets, sizeof(CameraProjection), VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER);
+        UpdateDescriptorSet(5, *vkDevice, RenderData::Lighting.descriptorSets, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, RenderData::depthResources.DepthImageView, noiseTextureImage->GetSampler(), VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL);
+        UpdateDescriptorSet(6, *vkDevice, RenderData::Lighting.descriptorSets, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, SSAOBlurRenderImage->GetImageView(), noiseTextureImage->GetSampler(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
         // Display
         std::vector<VkDescriptorSetLayoutBinding> DisplayBindings =
@@ -563,8 +590,8 @@ class MirrorVulkanApp {
             CreateDescriptorBinding(0, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
             CreateDescriptorBinding(1, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
             CreateDescriptorBinding(2, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
-            CreateDescriptorBinding(3, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_FRAGMENT_BIT)
-            //CreateDescriptorBinding(4, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT),
+            CreateDescriptorBinding(3, VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER, VK_SHADER_STAGE_FRAGMENT_BIT),
+            CreateDescriptorBinding(4, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, VK_SHADER_STAGE_FRAGMENT_BIT)
         };
         DisplayDescriptorLayout = std::make_unique<DescriptorLayout>(*vkDevice, DisplayBindings);
         DesciptorSetAllocate DisplayuboDescriptorSetAllocate(*vkDevice, descriptorPool->GetDescriptorPool(), DisplayDescriptorLayout->GetDescriptorSetLayout(), RenderData::DisplayQuad.descriptorSets, 3);
@@ -572,7 +599,7 @@ class MirrorVulkanApp {
         UpdateDescriptorSet(1, *vkDevice, RenderData::DisplayQuad.descriptorSets, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, SponzaSceneRenderedImage->GetImageView(), noiseTextureImage->GetSampler(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         UpdateDescriptorSet(2, *vkDevice, RenderData::DisplayQuad.descriptorSets, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, SSAOImage->GetImageView(), noiseTextureImage->GetSampler(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
         UpdateDescriptorSet(3, *vkDevice, RenderData::DisplayQuad.UniformBuffers, RenderData::DisplayQuad.descriptorSets, sizeof(RenderPresentSettings), VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER);
-        //UpdateDescriptorSet(4, *vkDevice, RenderData::DisplayQuad.descriptorSets, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, LightingPassImage->GetImageView(), noiseTextureImage->GetSampler(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
+        UpdateDescriptorSet(4, *vkDevice, RenderData::DisplayQuad.descriptorSets, VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER, LightingPassImage->GetImageView(), noiseTextureImage->GetSampler(), VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
     }
 
     /* Init vulkan using instance -> connection between our application vulkan library */
@@ -583,10 +610,9 @@ class MirrorVulkanApp {
             throw std::runtime_error("Validation layers not available.");
         }
 
-
         VkInstanceCreateInfo createInfo{};
         createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-
+        
         auto extensions = Window.GetRequiredExtensions();
         createInfo.enabledExtensionCount = static_cast<uint32_t>(extensions.size());
         createInfo.ppEnabledExtensionNames = extensions.data();
@@ -610,14 +636,14 @@ class MirrorVulkanApp {
 
 int main()
 {
-    MirrorVulkanApp app(true);
+    VulkanApp app(true);
 
     try{
         app.run();
     } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
-        return EXIT_FAILURE;
+        return 1;
     }
 
-    return EXIT_SUCCESS;
+    return 0;
 }

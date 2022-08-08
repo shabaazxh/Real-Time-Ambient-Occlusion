@@ -15,6 +15,9 @@ C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Blur.frag -o Postprocessing/
 C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Quad.vert -o Postprocessing/Quadvert.spv
 C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Quad.frag -o Postprocessing/Quadfrag.spv
 
+C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Lighting.vert -o Postprocessing/Lightingvert.spv
 C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Lighting.frag -o Postprocessing/Lightingfrag.spv
 
+C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Shadow.vert -o PostProcessing/Shadow.vert.spv
+C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Shadow.frag -o PostProcessing/Shadow.frag.spv
 pause

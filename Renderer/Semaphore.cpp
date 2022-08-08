@@ -1,8 +1,6 @@
 #include "Semaphore.h"
 
 
-
-
 void Semaphore::CreateSemaphore(VkDevice device){
     VkSemaphoreCreateInfo semaphoreInfo = {};
     semaphoreInfo.sType = VK_STRUCTURE_TYPE_SEMAPHORE_CREATE_INFO;

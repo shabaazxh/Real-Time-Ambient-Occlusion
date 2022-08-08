@@ -24,12 +24,12 @@ class Camera {
     struct MouseControlSettings {
         float yaw = -90.0f;
         float pitch = 0.0f;
-        float lastX = 800 / 2.0f;
-        float lastY = 600 / 2.0f;
+        float lastX = 1920 / 2.0f;
+        float lastY = 1080 / 2.0f;
     };
 
     Camera()  {
-        SetCameraPos(glm::vec3(0.0f, 0.0f, -0.5f));
+        SetCameraPos(glm::vec3(0.0f, 0.0f, 0.0f));
         m_CameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
         m_CameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
     }

@@ -2,7 +2,8 @@
 
 /*
 Based on jhk2 hbao implementation
-(jhk2, 2019)
+(jhk2, 2019) - Changes needed to be made to complete the algorithm such as rotating the direction angle and jittering samples
+the shader was re-worked to become compataible with Vulkan. Parameter to control darkness was also introduced
 https://github.com/jhk2/glsandbox/blob/master/kgl/samples/ao/hbao.glsl
 */
 
@@ -44,11 +45,12 @@ float STEP = ssao.hbaoSteps; //0.04
 float NUMBER_OF_STEPS = ssao.hbaoNumberOfSteps;
 float TANGENT_BIAS = 0.3;
 
-float sum = 0.0;
+float ao = 0.0;
 float occlusion = 0.0;
 
 const vec2 noiseScale = vec2(1920.0/4, 1080.0/4);
 
+//(ZaOniRinku, 2021) Use depth to obtain position data
 vec4 depthToPosition(vec2 uv) {
 
     float depth = texture(depthMap, uv).x;
@@ -59,6 +61,7 @@ vec4 depthToPosition(vec2 uv) {
     return vec4(vec3(viewSpace), 1.0);
 }
 
+//(ZaOniRinku, 2021) Use depth to obtain normal data
 vec4 depthToNormal(vec2 tc)
 {
     float depth = texture(depthMap, tc).x;
@@ -74,16 +77,18 @@ vec4 depthToNormal(vec2 tc)
     return vec4(n, 1.0);
 }
 
-//(Kubisch, 2015)
-vec2 RotateDirection(vec2 Dir, vec2 CosSin)
-{
-    return vec2(Dir.x*CosSin.x - Dir.y*CosSin.y, Dir.x*CosSin.y + Dir.y*CosSin.x);
-}
-
-//(Kubisch, 2015)
+//Using noise texture to produce a noise jitter value (Kubisch, 2015)
 vec4 GetJitter()
 {
-    return textureLod(texNoise, (gl_FragCoord.xy / 4), 0);
+    return texture(texNoise, (gl_FragCoord.xy / 4));
+}
+
+// Slight modified version of (Kubisch, 2015), we use rotation matrix
+vec2 RotateDirectionAngle(vec2 direction, vec2 noise)
+{
+    // contruct a rotation matrix to rotate the direction 
+    mat2 rotationMatrix = mat2(vec2(noise.x, -noise.y), vec2(noise.y, noise.x));
+    return direction * rotationMatrix;
 }
 
 void main()
@@ -94,7 +99,6 @@ void main()
     
     vec4 normal = depthToNormal(uvCoords);
     normal.y = -normal.y;
-    //normal.x = -normal.x;
 
     vec3 NDC_POS = (2.0 * pos) - 1.0; // normalized device coordinates
     vec4 unprojectPosition = inverse(camera.proj) * vec4(NDC_POS, 1.0);
@@ -104,18 +108,20 @@ void main()
     vec3 sampleNoise = texture(texNoise, uvCoords * noiseScale).xyz;
     sampleNoise.xy = sampleNoise.xy * 2.0 - vec2(1.0);
 
-    // A single direction
+    // split disk into uniform directions
     float samplingDiskDirection = 2 * PI / NUMBER_OF_SAMPLING_DIRECTIONS;
     vec4 Rand = GetJitter();
 
     for(int i = 0; i < NUMBER_OF_SAMPLING_DIRECTIONS; i++) {
 
-        // use i to get a new direction by * given direction 
+        // use i to get a new direction angle by * given direction 
         float samplingDirectionAngle = i * samplingDiskDirection;
-        //jitter direction
-        vec2 samplingDirection = RotateDirection(vec2(cos(samplingDirectionAngle), sin(samplingDirectionAngle)), Rand.xy);
+        //jitter direction./ Rotate the direction by a random per-pixel angle by passing in the angle 
+        //vec2 samplingDirection = RotateDirection(vec2(cos(samplingDirectionAngle), sin(samplingDirectionAngle)), Rand.xy);
 
-        //tangent angle : inverse cosine 
+        vec2 samplingDirection = RotateDirectionAngle(vec2(cos(samplingDirectionAngle), sin(samplingDirectionAngle)), Rand.xy);
+
+        //tangent angle : inverse cosine. We give it the direction and normal and use acos to get the angle
         float tangentAngle = acos(dot(vec3(samplingDirection, 0.0), normal.xyz)) - (0.5 * PI) + TANGENT_BIAS;
         float horizonAngle = tangentAngle; //set the horizon angle to the tangent angle to begin with
 
@@ -152,15 +158,15 @@ void main()
         }
 
             float norm = length(LastDifference) / RADIUS;
-            float attenuation = 1 - norm * norm;
+            float attenuation = 1 - (norm * norm);
 
             occlusion = clamp(attenuation * (sin(horizonAngle) - sin(tangentAngle)), 0.0, 1.0);
-            sum += 1.0 - occlusion * ssao.hbaoAmbientLightLevel; //control AO darkness
+            ao += 1.0 - occlusion * ssao.hbaoAmbientLightLevel; //control AO darkness
     }
 
-    sum /= NUMBER_OF_SAMPLING_DIRECTIONS;
+    ao /= NUMBER_OF_SAMPLING_DIRECTIONS;
     
-    outColor = vec4(sum, sum, sum, 1.0);
+    outColor = vec4(ao, ao, ao, 1.0);
 
 }
 

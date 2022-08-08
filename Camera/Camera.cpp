@@ -3,6 +3,7 @@
 
 void Camera::MouseControl(GLFWwindow* window, double xOffset, double yOffset) {
     
+    // Based on (Joey De Vries, 2020) of camera movement using mouse control
     if(m_LockCamera == false) {
 
         if(m_FirstMouse) {

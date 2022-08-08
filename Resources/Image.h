@@ -14,14 +14,13 @@ class Image {
         Image(Device& deviceRef) : deviceRef{deviceRef} {}
         void DestroyImageResources();
 
-        static VkImageViewCreateInfo CreateImageView(VkImage image, VkImageViewType viewType, VkFormat imageFormat, VkImageAspectFlags aspectFlags, uint32_t mipLevels);
+        static VkImageViewCreateInfo CreateImageView(VkImage image, VkImageViewType viewType, VkFormat imageFormat, VkImageAspectFlags aspectFlags);
         
         void CreateSampler();
         void SetImageView(VkImageView imageView);
         void CreateImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties);
         void BuildImageView(VkImage image, VkImageViewType viewType, VkFormat imageFormat, VkImageAspectFlags aspectFlags);
         void CreateImageResource(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, VkImageAspectFlags aspectFlags);
-        void GenerateMipmaps(VkImage image, VkFormat imageFormat, uint32_t width, uint32_t height, VkCommandPool commandPool);
         void TransitionImageLayout(VkCommandPool commandPool, VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout);
         void CopyBufferToImage(VkCommandPool commandPool, VkBuffer buffer, VkImage image, uint32_t width, uint32_t height);
 
@@ -29,7 +28,6 @@ class Image {
         VkImageView GetImageView() const { return m_ImageView; }
         VkDeviceMemory GetImageMemory() const { return m_ImageMemory; }
         VkSampler GetSampler() const { return m_Sampler; }
-        uint32_t GetMipLevels() const { return m_MipLevels; }
 
     private:
 
@@ -38,7 +36,6 @@ class Image {
     VkImage m_Image = VK_NULL_HANDLE;
     VkDeviceMemory m_ImageMemory;
     VkSampler m_Sampler = VK_NULL_HANDLE;
-    uint32_t m_MipLevels = 1;
 };
 
 inline VkFormat FindSupportedDepthFormat(Device& deviceRef, const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features)

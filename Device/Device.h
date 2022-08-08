@@ -55,6 +55,6 @@ private:
     VkSurfaceKHR m_Surface;
 
     const std::vector<const char*> DeviceExtensions = {
-        VK_KHR_SWAPCHAIN_EXTENSION_NAME
+        VK_KHR_SWAPCHAIN_EXTENSION_NAME    
     };
 };

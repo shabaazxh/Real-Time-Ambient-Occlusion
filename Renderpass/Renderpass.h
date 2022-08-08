@@ -9,9 +9,10 @@ class Renderpass {
     public:
 
     Renderpass(Device& device) : deviceRef{device} {}
-    void CreateRenderpass(std::vector<VkAttachmentDescription> attachments, VkImageLayout depthLayout);
+    void CreateRenderpass(std::vector<VkAttachmentDescription> attachments, VkImageLayout depthLayout, bool useColor);
     void CreateRenderpass(std::vector<VkAttachmentDescription> attachments);
     void DestroyRenderpass();
+    void CreateShadowRenderpass(std::vector<VkAttachmentDescription> attachments, VkImageLayout depthLayout, bool useColor);
     static VkAttachmentDescription createAttachment(VkFormat format, VkImageLayout initialLayout, VkImageLayout finalLayout, VkAttachmentLoadOp loadOp);
 
 

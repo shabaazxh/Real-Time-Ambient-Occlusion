@@ -3,6 +3,7 @@
 
 std::vector<char> FileLoader::LoadFile(const std::string& filepath)
 {
+    // Open the file with ate and binary flags in ordder to use tellg to obtain file size
     std::ifstream file(filepath, std::ios::ate | std::ios::binary);
 
     if(!file.is_open()){
@@ -12,8 +13,8 @@ std::vector<char> FileLoader::LoadFile(const std::string& filepath)
     size_t fileSize = (size_t) file.tellg();
     std::vector<char> buffer(fileSize);
 
-    file.seekg(0);
-    file.read(buffer.data(), fileSize);
+    file.seekg(0); //set first character to beginining of the file stream
+    file.read(buffer.data(), fileSize); // read contents into buffer vector
 
     file.close();
 

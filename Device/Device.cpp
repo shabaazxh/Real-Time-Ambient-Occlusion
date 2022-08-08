@@ -84,9 +84,11 @@ bool Device::DeviceSuitability(VkPhysicalDevice physicalDevice) {
    //Ensure our device can perform graphics operations
    QueueFamilyIndices indices = FindQueueFamilies(physicalDevice, m_Surface);
 
+    // check the swapchain extension support
    bool deviceExtensionSupport = CheckDeviceExtensios(physicalDevice);
 
    bool SwapChainAdequate = false;
+   // check if we have swapchain support
    if(deviceExtensionSupport){
        SwapChainSupportInfo swapChainSupport = QuerySwapChainSupport(physicalDevice);
        SwapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();

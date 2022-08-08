@@ -14,7 +14,6 @@ class DescriptorPool {
     DescriptorPool(Device& deviceRef) : deviceRef{deviceRef} {}
     void CreateDescriptorPool(std::vector<VkDescriptorPoolSize> poolSize, uint32_t maxSets);
     void DestroyDescriptorPool();
-    //void CreateDescriptorPool();
     const VkDescriptorPool& GetDescriptorPool() const { return m_DescriporPool; }
     private:
     Device& deviceRef;

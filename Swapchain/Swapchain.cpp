@@ -9,7 +9,19 @@ void SwapChain::SetWindow(GLFWwindow* window){
 // void SwapChain::SetDevice(VkDevice device){
 //     m_Device = device;
 // }
-
+// SwapChain::~SwapChain()
+// {
+//     std::cout << "SWAPCHAIN DESTROYED!" << "\n";
+//     for(auto framebuffer: m_swapChainFramebuffers){
+//         if(framebuffer == VK_NULL_HANDLE)
+//             vkDestroyFramebuffer(deviceRef.GetDevice(), framebuffer, nullptr);
+//     }
+//     for(auto imageView: m_swapChainImageViews){
+//         if(imageView == VK_NULL_HANDLE)
+//             vkDestroyImageView(deviceRef.GetDevice(), imageView, nullptr);
+//     }
+//     vkDestroySwapchainKHR(deviceRef.GetDevice(), m_SwapChain, nullptr);
+// }
 void SwapChain::SetDevice(Device& deviceRef) {
     deviceRef = deviceRef;
 }
@@ -28,7 +40,7 @@ void SwapChain::CreateSwapChainImageViews() {
     // Create swapchain image views for swapchain images
     m_swapChainImageViews.resize(m_swapChainImages.size());
     for(size_t i = 0; i < m_swapChainImages.size(); i++){
-        VkImageViewCreateInfo info = Image::CreateImageView(m_swapChainImages[i], VK_IMAGE_VIEW_TYPE_2D, m_swapChainImageFormat, VK_IMAGE_ASPECT_COLOR_BIT, 1);
+        VkImageViewCreateInfo info = Image::CreateImageView(m_swapChainImages[i], VK_IMAGE_VIEW_TYPE_2D, m_swapChainImageFormat, VK_IMAGE_ASPECT_COLOR_BIT);
 
         if(vkCreateImageView(deviceRef.GetDevice(), &info, nullptr, &m_swapChainImageViews[i]) != VK_SUCCESS){
             throw std::runtime_error("failed to create swapchain image views.");
@@ -143,7 +155,6 @@ VkPresentModeKHR SwapChain::SelectSwapPresentMode(const std::vector<VkPresentMod
 // Vulkan works with pixels so the swapchain extent must be specified in pixels
 // glfwGetFramebufferSize is usedd to obtain resolution of window in pixels
 VkExtent2D SwapChain::SelectSwapExtent(const VkSurfaceCapabilitiesKHR& capabilities) {
-
     if(capabilities.currentExtent.width != std::numeric_limits<uint32_t>::max()) {
         return capabilities.currentExtent;
     } else {
@@ -154,7 +165,7 @@ VkExtent2D SwapChain::SelectSwapExtent(const VkSurfaceCapabilitiesKHR& capabilit
             static_cast<uint32_t>(width),
             static_cast<uint32_t>(height)
         };
-
+       
         Extent.width = std::clamp(Extent.width, capabilities.minImageExtent.width, capabilities.maxImageExtent.width);
         Extent.height = std::clamp(Extent.height, capabilities.minImageExtent.height, capabilities.maxImageExtent.height);
 

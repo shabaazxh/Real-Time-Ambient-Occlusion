@@ -3,6 +3,9 @@
 
 void Model::LoadModel(std::string ModelPath){
 
+    // Implementation based on (tinyobjloader, 2021) README implementation example
+    // Improved implementation following (Overvoorde, 2016) article using tinyobjloader
+    
     tinyobj::attrib_t attrib;
     std::vector<tinyobj::shape_t> shapes;
     std::vector<tinyobj::material_t> materials;

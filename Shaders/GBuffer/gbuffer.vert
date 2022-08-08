@@ -13,7 +13,7 @@ layout(location = 3) in vec3 aNormal;
 layout(location = 0) out vec3 FragPos;
 layout(location = 1) out vec3 Normal;
 
-
+// G-buffer set up from vertex shader based on (Joey De Vries, 2020) implementation.
 void main() {
     vec4 viewPos = camera.view * camera.model * vec4(inPosition, 1.0);
     FragPos = viewPos.xyz;

@@ -27,23 +27,6 @@ struct Global {
          VkPipelineLayout pipelineLayout;
          VkFramebuffer framebuffer;
          VkRenderPass renderpass;
-
-         void Destroy(Device& deviceRef){
-
-               //for(size_t i = 0; i < 2; i++){
-               //     vkDestroyBuffer(deviceRef.GetDevice(), UniformBuffers[i], nullptr);
-               //     vkFreeMemory(deviceRef.GetDevice(), UniformMemory[i], nullptr);
-               //}
-
-               //if(vertexBuffer != VK_NULL_HANDLE){
-               //     vkDestroyBuffer(deviceRef.GetDevice(), vertexBuffer, nullptr);
-               //}
-
-               vkDestroyFramebuffer(deviceRef.GetDevice(), framebuffer, nullptr);
-               vkDestroyRenderPass(deviceRef.GetDevice(), renderpass, nullptr);
-               vkDestroyPipeline(deviceRef.GetDevice(), pipeline, nullptr);
-               vkDestroyPipelineLayout(deviceRef.GetDevice(), pipelineLayout, nullptr);
-          }
     };
 
     struct ModelData {
@@ -58,23 +41,6 @@ struct Global {
          VkPipelineLayout pipelineLayout;
          VkFramebuffer framebuffer;
          VkRenderPass renderpass;
-
-         void Destroy(Device& deviceRef){
-
-               //for(size_t i = 0; i < 2; i++){
-               //     vkDestroyBuffer(deviceRef.GetDevice(), UniformBuffers[i], nullptr);
-               //     vkFreeMemory(deviceRef.GetDevice(), UniformMemory[i], nullptr);
-               //}
-
-               //if(vertexBuffer != VK_NULL_HANDLE){
-               //     vkDestroyBuffer(deviceRef.GetDevice(), vertexBuffer, nullptr);
-               //}
-
-               vkDestroyFramebuffer(deviceRef.GetDevice(), framebuffer, nullptr);
-               vkDestroyRenderPass(deviceRef.GetDevice(), renderpass, nullptr);
-               vkDestroyPipeline(deviceRef.GetDevice(), pipeline, nullptr);
-               vkDestroyPipelineLayout(deviceRef.GetDevice(), pipelineLayout, nullptr);
-         }
     };
 
     struct DepthResources {
@@ -95,13 +61,6 @@ struct Global {
          VkPipelineLayout pipelineLayout;
          VkFramebuffer framebuffer;
          VkRenderPass renderpass;
-
-         void Destroy(Device& deviceRef){
-               vkDestroyFramebuffer(deviceRef.GetDevice(), framebuffer, nullptr);
-               vkDestroyRenderPass(deviceRef.GetDevice(), renderpass, nullptr);
-               vkDestroyPipeline(deviceRef.GetDevice(), pipeline, nullptr);
-               vkDestroyPipelineLayout(deviceRef.GetDevice(), pipelineLayout, nullptr);
-         }
     };
 
      struct SSAORenderData {
@@ -119,27 +78,6 @@ struct Global {
           std::vector<VkBuffer> cameraUniformBuffers;
           std::vector<VkDeviceMemory> cameraUniformMemory;
           std::vector<VkDescriptorSet> descriptorSets;
-
-          void Destroy(Device& deviceRef){
-
-               for(size_t i = 0; i < 2; i++){
-                    //vkDestroyBuffer(deviceRef.GetDevice(), UniformBuffers[i], nullptr);
-                    // vkDestroyBuffer(deviceRef.GetDevice(), cameraUniformBuffers[i], nullptr);
-                    // vkFreeMemory(deviceRef.GetDevice(), cameraUniformMemory[i], nullptr);
-                    //vkFreeMemory(deviceRef.GetDevice(), UniformMemory[i], nullptr);
-               }
-
-               //if(vertexBuffer != VK_NULL_HANDLE){
-               //     vkDestroyBuffer(deviceRef.GetDevice(), vertexBuffer, nullptr);
-               //}
-
-               vkDestroyFramebuffer(deviceRef.GetDevice(), framebuffer, nullptr);
-               vkDestroyRenderPass(deviceRef.GetDevice(), renderpass, nullptr);
-               vkDestroyPipeline(deviceRef.GetDevice(), ssaoPipeline, nullptr);
-               vkDestroyPipeline(deviceRef.GetDevice(), hbaoPipeline, nullptr);
-               vkDestroyPipeline(deviceRef.GetDevice(), alchchemyPipeline, nullptr);
-               vkDestroyPipelineLayout(deviceRef.GetDevice(), pipelineLayout, nullptr);
-         }
      };
 
      struct SSAOBlur {
@@ -148,13 +86,6 @@ struct Global {
           VkRenderPass renderpass;
           VkFramebuffer framebuffer;
           std::vector<VkDescriptorSet> descriptorSets;
-
-          void Destroy(Device& deviceRef){
-               vkDestroyFramebuffer(deviceRef.GetDevice(), framebuffer, nullptr);
-               vkDestroyRenderPass(deviceRef.GetDevice(), renderpass, nullptr);
-               vkDestroyPipeline(deviceRef.GetDevice(), pipeline, nullptr);
-               vkDestroyPipelineLayout(deviceRef.GetDevice(), pipelineLayout, nullptr);
-         }
      };
 
      struct ImGuiData {
@@ -162,11 +93,6 @@ struct Global {
           VkRenderPass renderpass;
           std::vector<VkCommandBuffer> ImGuiCmds;
 
-          void Destroy(Device& deviceRef)
-          {
-               vkDestroyRenderPass(deviceRef.GetDevice(), renderpass, nullptr);
-               vkDestroyDescriptorPool(deviceRef.GetDevice(), ImGuiDescriptorPool, nullptr);
-          }
      };
 
      struct LightingPass {
@@ -178,18 +104,16 @@ struct Global {
           std::vector<VkBuffer> UniformBuffers;
           std::vector<VkDeviceMemory> UniformMemory;
 
-          void Destroy(Device& deviceRef){
+          std::vector<VkDescriptorSet> ShadowdescriptorSets;
+          std::vector<VkBuffer> ShadowUniformBuffers;
+          std::vector<VkDeviceMemory> ShadowUniformMemory;
+     };
 
-               //for(size_t i = 0; i < 2; i++){
-               //     vkDestroyBuffer(deviceRef.GetDevice(), UniformBuffers[i], nullptr);
-               //     vkFreeMemory(deviceRef.GetDevice(), UniformMemory[i], nullptr);
-               //}
-
-               vkDestroyFramebuffer(deviceRef.GetDevice(), framebuffer, nullptr);
-               vkDestroyRenderPass(deviceRef.GetDevice(), renderpass, nullptr);
-               vkDestroyPipeline(deviceRef.GetDevice(), pipeline, nullptr);
-               vkDestroyPipelineLayout(deviceRef.GetDevice(), pipelineLayout, nullptr);
-         }
+     struct Shadows {
+          VkRenderPass renderpass;
+          VkFramebuffer framebuffer;
+          VkPipeline pipeline;
+          VkPipelineLayout pipelineLayout;
      };
 
     inline static SSAORenderData ssaoRenderData;
@@ -202,6 +126,7 @@ struct Global {
     inline static ImGuiData ImGuiData;
     inline static SSAOBlur SSAOBlur;
     inline static LightingPass Lighting;
+    inline static Shadows Shadow;
 };
 
 

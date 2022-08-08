@@ -240,7 +240,7 @@ void Pipeline::CreateDepthResources(Device& deviceReference, VkExtent2D extent) 
     RenderData::depthResources.DepthImage = ImageResource.GetImage();
     RenderData::depthResources.DepthImageMemory = ImageResource.GetImageMemory();
 
-    VkImageViewCreateInfo depthImageViewCreateInfo  = Image::CreateImageView(RenderData::depthResources.DepthImage, VK_IMAGE_VIEW_TYPE_2D, RenderData::depthResources.DepthFormat, VK_IMAGE_ASPECT_DEPTH_BIT, 1);
+    VkImageViewCreateInfo depthImageViewCreateInfo  = Image::CreateImageView(RenderData::depthResources.DepthImage, VK_IMAGE_VIEW_TYPE_2D, RenderData::depthResources.DepthFormat, VK_IMAGE_ASPECT_DEPTH_BIT);
 
     if(vkCreateImageView(deviceReference.GetDevice(), &depthImageViewCreateInfo, nullptr, &RenderData::depthResources.DepthImageView) != VK_SUCCESS) {
         throw std::runtime_error("failed to create depth image view in Pipline");

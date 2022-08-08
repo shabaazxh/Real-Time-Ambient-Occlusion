@@ -7,13 +7,8 @@ void DescriptorPool::DestroyDescriptorPool() {
     }
 }
 
+// Descriptor pool needs to be created allocate descriptors
 void DescriptorPool::CreateDescriptorPool(std::vector<VkDescriptorPoolSize> poolSize, uint32_t maxSets) {
-
-    // std::array<VkDescriptorPoolSize,2> poolSize{};
-    // poolSize[0].type = VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
-    // poolSize[0].descriptorCount = 20;
-    // poolSize[1].type = VK_DESCRIPTOR_TYPE_COMBINED_IMAGE_SAMPLER;
-    // poolSize[1].descriptorCount = 20;
 
     VkDescriptorPoolCreateInfo poolInfo{};
     poolInfo.sType = VK_STRUCTURE_TYPE_DESCRIPTOR_POOL_CREATE_INFO;

@@ -16,6 +16,7 @@ void Renderer::DestroyRendererResources()
     }
 }
 
+// Create semaphore objects to synchronize the GPU
 void Renderer::CreateSync() {
     imageAvailableSemaphore.resize(MAX_FRAMES_IN_FLIGHT);
     renderFinishedSemaphore.resize(MAX_FRAMES_IN_FLIGHT);
@@ -30,6 +31,7 @@ void Renderer::CreateSync() {
 
 }
 
+// Create fence objects for CPU synchronization 
 void Renderer::CreateFence() {
     inFlightFence.resize(MAX_FRAMES_IN_FLIGHT);
 
@@ -72,14 +74,6 @@ void Renderer::UpdateCamera()
         CameraController.SetCameraPos(CameraController.GetCameraPos() -= glm::normalize(glm::cross(CameraController.GetCameraFront(), CameraController.GetCameraUp())) * CameraSpeed);
     }
 
-    // if(glfwGetKey(windowRef.GetWindow(), GLFW_KEY_SPACE) == GLFW_PRESS){
-    //     CameraController.SetCameraPos(CameraController.GetCameraPos() += glm::normalize(glm::cross(right, CameraController.GetCameraFront())) * CameraSpeed);
-    // }
-
-    // if(glfwGetKey(windowRef.GetWindow(), GLFW_KEY_R) == GLFW_PRESS){
-    //     CameraController.SetCameraPos(CameraController.GetCameraPos() -= glm::normalize(glm::cross(right, CameraController.GetCameraFront())) * CameraSpeed);
-    // }
-
     if(glfwGetKey(windowRef.GetWindow(), GLFW_KEY_SPACE) == GLFW_PRESS){
         glm::vec3 currentPosition = CameraController.GetCameraPos();
         currentPosition.y += CameraSpeed;
@@ -113,7 +107,7 @@ void Renderer::UpdateCamera()
         glfwSetWindowShouldClose(windowRef.GetWindow(), true);
     }
 }
-
+// Data that needs to be updated every frame is set to be updated here
 void Renderer::UpdateUniforms(uint32_t currentImage) {
 
     static auto startTime = std::chrono::high_resolution_clock::now();
@@ -124,12 +118,11 @@ void Renderer::UpdateUniforms(uint32_t currentImage) {
     CameraProjection camera{};
     camera.model = glm::mat4(1.0f);
     camera.model = glm::translate(camera.model, glm::vec3(0.0f, 0.0f, 0.0f));
-    //camera.model = glm::rotate(glm::mat4(1.0), time * glm::radians(90.0f), glm::vec3(0.0f, 0.0f, 1.0));
     camera.view = glm::lookAt(CameraController.GetCameraPos(), CameraController.GetCameraPos() + CameraController.GetCameraFront(), CameraController.GetCameraUp());
-    camera.proj = glm::perspective(glm::radians(90.0f), swapChainRef.GetSwapChainExtent().width / (float) swapChainRef.GetSwapChainExtent().height, 0.1f, 1000.0f);
+    camera.proj = glm::perspective(glm::radians(45.0f), swapChainRef.GetSwapChainExtent().width / (float) swapChainRef.GetSwapChainExtent().height, 0.1f, 1000.0f);
     camera.proj[1][1] *= -1;
-    //std::cout << CameraController.GetCameraPos().x << "," <<  CameraController.GetCameraPos().y << "," << CameraController.GetCameraPos().z << std::endl;
 
+    //(Joey De Vries, 2020) Original implementation uses a hemisphere. My changes make this a sphere kernel
     std::uniform_real_distribution<float> randomFloats(0.0, 1.0);
     std::default_random_engine generator;
     std::vector<glm::vec4> ssaoKernel;
@@ -160,14 +153,23 @@ void Renderer::UpdateUniforms(uint32_t currentImage) {
     ssao.hbaoNumberOfSteps = SSAOuboController::hbaoNumberOfSteps;
     ssao.hbaoAmbientLightLevel = SSAOuboController::hbaoAmbientLightLevel;
 
-    ssao.alchemySampleTurns = SSAOuboController::alchemySampleTurns;
     ssao.alchemySigma = SSAOuboController::alchemySigma;
     ssao.alchemyKappa = SSAOuboController::alchemyKappa;
 
+    ssao.time = glfwGetTime();
+
     Light Light{};
-    Light.LightPosition = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
+    //Light.LightPosition = glm::vec4(0.0f, 5.0f, 2.0f, 1.0f);
+    Light.LightPosition = glm::vec4(0.0f, 4.0f, 2.0f, 0.0f);
     Light.LightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     Light.ObjectColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+    Light.LightPosition.x = 1.0f + sin(glfwGetTime()) * 2.0f;
+    //Light.LightPosition.y = sin(glfwGetTime() / 2.0f) * 1.0f;
+
+    //glm::mat4 LightProjection = glm::ortho(-10.0f, 10.0f, 10.0f, -10.0f, 1.0f, 7.5f);
+    glm::mat4 LightProjection = glm::perspective(glm::radians(45.0f), 1.0f, 1.0f, 30.0f);
+    glm::mat4 LightView = glm::lookAt(glm::vec3(Light.LightPosition), glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+    Light.LightSpaceMatrix = LightProjection * LightView;
 
     RenderPresentSettings presentSettings{};
     presentSettings.enableBlur = RenderPresentSettingsController::enableBlur;
@@ -195,11 +197,11 @@ void Renderer::UpdateUniforms(uint32_t currentImage) {
     vkUnmapMemory(deviceRef.GetDevice(), RenderData::Lighting.UniformMemory[currentImage]);
 }
 
-void Renderer::Drawframe() {
+void Renderer::Renderframe() {
     // Wait until previous frame has finished so that the semaphores are available to use 
     vkWaitForFences(deviceRef.GetDevice(), 1, &inFlightFence[currentFrame], VK_TRUE, UINT64_MAX);
 
-
+    // Acquire the next available image
     uint32_t imageIndex;
     vkAcquireNextImageKHR(deviceRef.GetDevice(), swapChainRef.GetSwapChain(), UINT64_MAX, imageAvailableSemaphore[currentFrame].GetSemaphore(), VK_NULL_HANDLE, &imageIndex);
 
@@ -230,6 +232,7 @@ void Renderer::Drawframe() {
     submitInfo.signalSemaphoreCount = 1;
     submitInfo.pSignalSemaphores = signalSemaphores;
 
+    // Submit commands to the graphics queue
     if(vkQueueSubmit(deviceRef.GetGraphicsQueue(), 1, &submitInfo, inFlightFence[currentFrame]) != VK_SUCCESS){
         throw std::runtime_error("failed to submit draw command buffer");
     }
@@ -244,6 +247,7 @@ void Renderer::Drawframe() {
     presentInfo.pSwapchains = swapChains;
     presentInfo.pImageIndices = &imageIndex;
 
+    // Submit to present queue for presentation
     vkQueuePresentKHR(deviceRef.GetPresentQueue(), &presentInfo);
 
     currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
@@ -258,6 +262,36 @@ void Renderer::RecordCommandbuffer(uint32_t currentFrame, uint32_t imageIndex){
 
     if(vkBeginCommandBuffer(commandBuffers[currentFrame], &beginInfo) != VK_SUCCESS){
         throw std::runtime_error("failed to begin recording command buffer!");
+    }
+    // --------------------------------------------------------------------------------------------
+    // Shadow map 
+    {
+        VkRenderPassBeginInfo renderPassInfo = {};
+        renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+        renderPassInfo.renderPass = RenderData::Shadow.renderpass;
+        renderPassInfo.framebuffer = RenderData::Shadow.framebuffer; 
+        renderPassInfo.renderArea.offset = {0,0};
+        renderPassInfo.renderArea.extent = {2048, 2048};
+
+        std::array<VkClearValue,1> clearValues{};
+        clearValues[0].depthStencil = {1.0f, 0};
+
+        renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
+        renderPassInfo.pClearValues = clearValues.data();
+
+        vkCmdBeginRenderPass(commandBuffers[currentFrame], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+        vkCmdBindPipeline(commandBuffers[currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, RenderData::Shadow.pipeline);
+        
+        VkBuffer vertexBuffers[] = {RenderData::SponzaData.vertexBuffer};
+        VkDeviceSize offsets[] = {0};
+
+        vkCmdBindVertexBuffers(commandBuffers[currentFrame], 0, 1, vertexBuffers, offsets);
+        vkCmdBindDescriptorSets(commandBuffers[currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, RenderData::Shadow.pipelineLayout, 0, 1,
+        &RenderData::Lighting.descriptorSets[currentFrame], 0, nullptr);
+        
+        vkCmdDraw(commandBuffers[currentFrame], static_cast<uint32_t>(RenderData::SponzaData.vertexData.size()), 1, 0, 0);
+
+        vkCmdEndRenderPass(commandBuffers[currentFrame]);
     }
 
      //----------------------------------------------------------------------------------------
@@ -343,7 +377,7 @@ void Renderer::RecordCommandbuffer(uint32_t currentFrame, uint32_t imageIndex){
         renderPassInfo.pClearValues = clearValues.data();
 
         vkCmdBeginRenderPass(commandBuffers[currentFrame], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-
+        // Switch depending on the current AO method selected
         if(Settings::AOStateController == Settings::AOState::SSAO)
         {
             vkCmdBindPipeline(commandBuffers[currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, RenderData::ssaoRenderData.ssaoPipeline);
@@ -400,36 +434,36 @@ void Renderer::RecordCommandbuffer(uint32_t currentFrame, uint32_t imageIndex){
 
         vkCmdEndRenderPass(commandBuffers[currentFrame]);
     }
-
+    // Lighting configuration set up to provide easy user extensibility 
     //---------------------------------------------------------------------------------------
     // Lighting
     {
-        // VkRenderPassBeginInfo renderPassInfo = {};
-        // renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
-        // renderPassInfo.renderPass = RenderData::Lighting.renderpass;
-        // renderPassInfo.framebuffer = RenderData::Lighting.framebuffer;
-        // renderPassInfo.renderArea.offset = {0,0};
-        // renderPassInfo.renderArea.extent = swapChainRef.GetSwapChainExtent();
+        VkRenderPassBeginInfo renderPassInfo = {};
+        renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
+        renderPassInfo.renderPass = RenderData::Lighting.renderpass;
+        renderPassInfo.framebuffer = RenderData::Lighting.framebuffer;
+        renderPassInfo.renderArea.offset = {0,0};
+        renderPassInfo.renderArea.extent = swapChainRef.GetSwapChainExtent();
 
-        // std::array<VkClearValue,2> clearValues{};
-        // clearValues[0].color = {{0.0f, 0.0f, 0.0f, 1.0f}};
-        // clearValues[1].depthStencil = {1.0f, 0};
+        std::array<VkClearValue,2> clearValues{};
+        clearValues[0].color = {{0.0f, 0.0f, 0.0f, 1.0f}};
+        clearValues[1].depthStencil = {1.0f, 0};
 
-        // renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
-        // renderPassInfo.pClearValues = clearValues.data();
+        renderPassInfo.clearValueCount = static_cast<uint32_t>(clearValues.size());
+        renderPassInfo.pClearValues = clearValues.data();
 
-        // vkCmdBeginRenderPass(commandBuffers[currentFrame], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
-        // vkCmdBindPipeline(commandBuffers[currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, RenderData::Lighting.pipeline);
+        vkCmdBeginRenderPass(commandBuffers[currentFrame], &renderPassInfo, VK_SUBPASS_CONTENTS_INLINE);
+        vkCmdBindPipeline(commandBuffers[currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, RenderData::Lighting.pipeline);
 
-        // VkBuffer vertexBuffers[] = {RenderData::DisplayQuad.vertexBuffer};
-        // VkDeviceSize offsets[] = {0};
+        VkBuffer vertexBuffers[] = {RenderData::DisplayQuad.vertexBuffer};
+        VkDeviceSize offsets[] = {0};
 
-        // vkCmdBindVertexBuffers(commandBuffers[currentFrame], 0, 1, vertexBuffers, offsets);
-        // vkCmdBindDescriptorSets(commandBuffers[currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, RenderData::Lighting.pipelineLayout, 0, 1,
-        // &RenderData::Lighting.descriptorSets[currentFrame], 0, nullptr);
-        // vkCmdDraw(commandBuffers[currentFrame], static_cast<uint32_t>(RenderData::DisplayQuad.vertexData.size()), 1, 0, 0);
+        vkCmdBindVertexBuffers(commandBuffers[currentFrame], 0, 1, vertexBuffers, offsets);
+        vkCmdBindDescriptorSets(commandBuffers[currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, RenderData::Lighting.pipelineLayout, 0, 1,
+        &RenderData::Lighting.descriptorSets[currentFrame], 0, nullptr);
+        vkCmdDraw(commandBuffers[currentFrame], static_cast<uint32_t>(RenderData::DisplayQuad.vertexData.size()), 1, 0, 0);
 
-        // vkCmdEndRenderPass(commandBuffers[currentFrame]);
+        vkCmdEndRenderPass(commandBuffers[currentFrame]);
     }
 
     //----------------------------------------------------------------------------------------

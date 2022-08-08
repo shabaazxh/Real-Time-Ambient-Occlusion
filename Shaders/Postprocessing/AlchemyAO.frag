@@ -12,9 +12,10 @@ layout(binding = 0) uniform SSAOubo {
 	int hbaoNumberOfSteps;
 	float hbaoAmbientLightLevel;
 
-	int alchemySampleTurns;
 	float alchemySigma;
 	float alchemyKappa;
+
+	float time;
 }ssao;
 
 layout(binding = 4) uniform CameraProjection {
@@ -34,13 +35,13 @@ layout(location = 1) in vec2 uvCoords;
 layout(location = 0) out vec4 outColor;
 
 float sampleRadius = ssao.radius;
-int samples = ssao.alchemySampleTurns; 
-int turns = 16;
-float depthThreshold = 0.000;
+int samples = ssao.sample_amount; 
+float bias = 0.001;
 float shadowScalar = ssao.alchemySigma; 
 float shadowContrast = ssao.alchemyKappa;
 const float epsilon = 0.0001;
 
+//(ZaOniRinku, 2021) Use depth to obtain position data
 vec3 depthToPosition(vec2 tc)
 {
 	float depth = texture(depthMap, tc).x;
@@ -49,6 +50,7 @@ vec3 depthToPosition(vec2 tc)
 	return viewSpace.xyz / viewSpace.w;
 }
 
+//(ZaOniRinku, 2021) Use depth to obtain normal data
 vec4 depthToNormal(vec2 tc)
 {
 	float depth = texture(depthMap, tc).x;
@@ -63,52 +65,62 @@ vec4 depthToNormal(vec2 tc)
 	return vec4(n, 1.0);
 }
 
+float RANDOMVAUE = 0.0f;
+
+//https://stackoverflow.com/a/4275343/14723580
+// Generate random values 
+vec2 RandomHashValue()
+{
+	return fract(sin(vec2(RANDOMVAUE += 0.1, RANDOMVAUE += 0.1)) * vec2(43758.5453123, 22578.1459123));
+}
+
+//https://stackoverflow.com/a/50746409/14723580
+// Obtain a random sample from the disk, returned as cartesian coordinates
+vec2 DiskPoint(float sampleRadius, float x, float y)
+{
+	float r = sampleRadius * sqrt(x); // square root number to map point to radius
+	float theta = y * (2.0 * PI); // theta is angle in radians inside disk
+	return vec2(r * cos(theta), r * sin(theta));
+}
+
+//Sigma is intensity
+//Kappa is contrast
+
 void main()
 {
+	// Randon value updating based on (Rasquinha, 2022) random hash implementation
+	RANDOMVAUE = (uvCoords.x * uvCoords.y) * 64.0;
+	RANDOMVAUE += fract(ssao.time) * 64.0f;
+	
 	// Normals and positions in view-space
 	vec3 Position = depthToPosition(uvCoords);
 	vec3 Normal = depthToNormal(uvCoords).xyz;
 
-	float ambientValue = 0.0;
-	float screen_radius = (sampleRadius * 100.0 / Position.z);
-	
-	int max_mip = textureQueryLevels(gPosition) - 1;
-	const float TAU = 2.0 * PI;
-	ivec2 px = ivec2(gl_FragCoord.xy);
-
-	//(Usher, 2015)
-	float phi = (30u * px.x ^ px.y + 10u * px.x * px.y);
+	float ao = 0.0;
+	//(Timurson, 2021) projection of a ball around the point 
+	float screen_radius = (sampleRadius * 0.75 / Position.z); //ball around the point 
 	
 	for (int i = 0; i < samples; ++i)
 	{
-		// Define Alchemy AO helper variables (McGuire, Mara and Luebke, 2012)
-		float alpha = 1.f / samples * (i + 0.5);
-		float h = screen_radius * alpha;
-		float theta = TAU * alpha * turns + phi;
-		vec2 u = vec2(cos(theta), sin(theta));
+		vec2 RandomValue = RandomHashValue(); // Generate a random value
+		vec2 disk = DiskPoint(sampleRadius, RandomValue.x, RandomValue.y); // Obtain disk point of random value 
+		vec2 samplepos = uvCoords + (disk.xy) * screen_radius; // offset disk point from current uv 
 
-		// McGure MIP calculation (McGuire, Mara and Luebke, 2012)
-		int m = clamp(findMSB(int(h)) - 4, 0, max_mip);
-		ivec2 mip_pos = clamp((ivec2(h * u) + px) >> m, ivec2(0), textureSize(gPosition, m) - ivec2(1));
-
-		//(Usher, 2015)
-		//vec3 worldPi = texelFetch(gPosition, mip_pos, m).xyz;
-		vec3 Pi = texelFetch(gPosition, mip_pos, m).xyz;
-		//vec3 Pi = vec3(camera.view * vec4(worldPi, 1.0));
-		vec3 V = Pi - Position;
-		float sqrLen    = dot(V, V);
-		float Heaviside = step(length(sqrLen), sampleRadius);
-		float dD = depthThreshold * Position.z;
-		float c = 0.1 * sampleRadius;
+		//(Timurson, 2021) built understanding for final calculations from his different AO method implementation
+		vec3 P = depthToPosition(samplepos.xy); // convert sample to view-space
+		vec3 V = P - Position; //calculate distance from current frag position to sample position
+		float Heaviside = step(length(dot(V, V)), sampleRadius); //Ensure it is within the radius of influence using step
+		float dD = bias * Position.z; //multiply bias by z as suggested by paper, to prevent dot products becoming sensitive  
 								  
-		ambientValue += (max(0.0, dot(Normal, V) + dD) * Heaviside) / (max(c * c, sqrLen) + epsilon);
-	  
+		// Apply summations calculations following equation 10 from paper  
+		ao += (max(0.0, dot(Normal, V) + dD) * Heaviside) / (dot(V, V) + epsilon);
 	}
 	
-	ambientValue *= (2.0 * shadowScalar) / samples;
-	ambientValue = max(0.0, 1.0 - pow(ambientValue, shadowContrast));
-	
-    outColor = vec4(ambientValue, ambientValue, ambientValue, 1.0);
+	// Apply final calculations for AO following equation 10 from paper 
+	ao *= (2.0 * shadowScalar) / samples; //apply shadow scalar as show in the equation of the paper
+	ao = max(0.0, 1.0 - pow(ao, shadowContrast)); //final ambient value
+
+    outColor = vec4(ao, ao, ao, 1.0);
 }
 
 
