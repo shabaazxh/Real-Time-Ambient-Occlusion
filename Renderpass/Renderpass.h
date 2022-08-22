@@ -20,5 +20,5 @@ class Renderpass {
 
     private:
     Device& deviceRef;
-    VkRenderPass m_Renderpass = VK_NULL_HANDLE;
+    VkRenderPass m_Renderpass;
 };

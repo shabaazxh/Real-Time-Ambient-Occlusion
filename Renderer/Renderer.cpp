@@ -1,7 +1,5 @@
 #include "Renderer.h"
 
-
-
 void Renderer::DestroyRendererResources()
 {
 
@@ -14,6 +12,11 @@ void Renderer::DestroyRendererResources()
     for(auto& fence: inFlightFence){
         vkDestroyFence(deviceRef.GetDevice(), fence, nullptr);
     }
+}
+
+void Renderer::SetRecreateSwapChain(bool value)
+{
+    recreateSwapchain = value;
 }
 
 // Create semaphore objects to synchronize the GPU
@@ -204,13 +207,24 @@ void Renderer::Renderframe() {
 
     // Acquire the next available image
     uint32_t imageIndex;
-    vkAcquireNextImageKHR(deviceRef.GetDevice(), swapChainRef.GetSwapChain(), UINT64_MAX, imageAvailableSemaphore[currentFrame].GetSemaphore(), VK_NULL_HANDLE, &imageIndex);
+    // Store result to check if Swapchain is still adequate
+    VkResult result = vkAcquireNextImageKHR(deviceRef.GetDevice(), swapChainRef.GetSwapChain(), UINT64_MAX, imageAvailableSemaphore[currentFrame].GetSemaphore(), VK_NULL_HANDLE, &imageIndex);
 
-    ImGuiUIRef.drawImGui(swapChainRef.GetSwapChainFramebuffers(), swapChainRef.GetSwapChainExtent(), currentFrame, imageIndex);
-    UpdateUniforms(currentFrame);
+    // Check if the swapchain is still valid or has the window been resized.
+    if(result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || windowRef.GetFramebufferResized() == true){
+        windowRef.SetFramebufferResized(false);
+        recreateSwapchain = true;
+        return;
+    } else if(result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+    {
+        throw std::runtime_error("failed to acquire swap chain image. Swapchain image could be out of date.");
+    }
 
     // Reset the Fence to an unsignaled state
     vkResetFences(deviceRef.GetDevice(), 1, &inFlightFence[currentFrame]);
+
+    ImGuiUIRef.drawImGui(swapChainRef.GetSwapChainFramebuffers(), swapChainRef.GetSwapChainExtent(), currentFrame, imageIndex);
+    UpdateUniforms(currentFrame);
 
     vkResetCommandBuffer(commandBuffers[currentFrame], 0);
     RecordCommandbuffer(currentFrame, imageIndex);
@@ -249,7 +263,16 @@ void Renderer::Renderframe() {
     presentInfo.pImageIndices = &imageIndex;
 
     // Submit to present queue for presentation
-    vkQueuePresentKHR(deviceRef.GetPresentQueue(), &presentInfo);
+    result = vkQueuePresentKHR(deviceRef.GetPresentQueue(), &presentInfo);
+    
+    if(result == VK_ERROR_OUT_OF_DATE_KHR || result == VK_SUBOPTIMAL_KHR || windowRef.GetFramebufferResized() == true){
+        windowRef.SetFramebufferResized(false);
+        recreateSwapchain = true;
+        return;
+    } else if(result != VK_SUCCESS && result != VK_SUBOPTIMAL_KHR)
+    {
+        throw std::runtime_error("failed to acquire swap chain image. Swapchain image could be out of date.");
+    }
 
     currentFrame = (currentFrame + 1) % MAX_FRAMES_IN_FLIGHT;
 }
@@ -266,7 +289,7 @@ void Renderer::RecordCommandbuffer(uint32_t currentFrame, uint32_t imageIndex){
     }
     // --------------------------------------------------------------------------------------------
     // Shadow map 
-    {
+    {       
         VkRenderPassBeginInfo renderPassInfo = {};
         renderPassInfo.sType = VK_STRUCTURE_TYPE_RENDER_PASS_BEGIN_INFO;
         renderPassInfo.renderPass = RenderData::Shadow.renderpass;
@@ -396,7 +419,7 @@ void Renderer::RecordCommandbuffer(uint32_t currentFrame, uint32_t imageIndex){
         
         VkBuffer vertexBuffers[] = {RenderData::ssaoRenderData.vertexBuffer};
         VkDeviceSize offsets[] = {0};
-
+    
         vkCmdBindVertexBuffers(commandBuffers[currentFrame], 0, 1, vertexBuffers, offsets);
         vkCmdBindDescriptorSets(commandBuffers[currentFrame], VK_PIPELINE_BIND_POINT_GRAPHICS, RenderData::ssaoRenderData.pipelineLayout, 0, 1,
         &RenderData::ssaoRenderData.descriptorSets[currentFrame], 0, nullptr);

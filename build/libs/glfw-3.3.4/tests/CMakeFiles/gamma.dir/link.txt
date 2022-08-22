@@ -1,0 +1,1 @@
+/usr/bin/clang -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/gamma.dir/gamma.c.o CMakeFiles/gamma.dir/__/deps/glad_gl.c.o -o gamma.app/Contents/MacOS/gamma  ../src/libglfw3.a -framework Cocoa -framework IOKit -framework CoreFoundation 

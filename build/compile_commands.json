@@ -1,0 +1,577 @@
+[
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/main.cpp.o -c /Users/shabaaz/Desktop/Vulkan/main.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/main.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Application/Application.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Application/Application.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Application/Application.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Device/Device.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Device/Device.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Device/Device.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Window/Window.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Window/Window.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Window/Window.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Swapchain/Swapchain.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Swapchain/Swapchain.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Swapchain/Swapchain.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Resources/image.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Resources/image.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Resources/image.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Resources/FileLoad.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Resources/FileLoad.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Resources/FileLoad.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Pipelines/Pipelines.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Pipelines/Pipelines.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Pipelines/Pipelines.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Renderpass/Renderpass.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Renderpass/Renderpass.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Renderpass/Renderpass.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Framebuffer/Framebuffer.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Framebuffer/Framebuffer.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Framebuffer/Framebuffer.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Commands/CommandPool.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Commands/CommandPool.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Commands/CommandPool.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Commands/Commandbuffer.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Commands/Commandbuffer.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Commands/Commandbuffer.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Renderer/Renderer.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Renderer/Renderer.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Renderer/Renderer.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Renderer/Semaphore.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Renderer/Semaphore.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Renderer/Semaphore.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/ImGui/ImGui.cpp.o -c /Users/shabaaz/Desktop/Vulkan/ImGui/ImGui.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/ImGui/ImGui.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Resources/Buffer.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Resources/Buffer.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Resources/Buffer.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Camera/Camera.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Camera/Camera.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Camera/Camera.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Descriptors/DescriptorLayout.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Descriptors/DescriptorLayout.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Descriptors/DescriptorLayout.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Descriptors/DescriptorPool.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Descriptors/DescriptorPool.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Descriptors/DescriptorPool.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Model/Model.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Model/Model.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Model/Model.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/Model/tinyobjloader.cpp.o -c /Users/shabaaz/Desktop/Vulkan/Model/tinyobjloader.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/Model/tinyobjloader.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/libs/imgui/imgui.cpp.o -c /Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/libs/imgui/imgui_impl_vulkan.cpp.o -c /Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_impl_vulkan.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_impl_vulkan.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/libs/imgui/imgui_impl_glfw.cpp.o -c /Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_impl_glfw.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_impl_glfw.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/libs/imgui/imgui_draw.cpp.o -c /Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_draw.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_draw.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/libs/imgui/imgui_demo.cpp.o -c /Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_demo.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_demo.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/libs/imgui/imgui_tables.cpp.o -c /Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_tables.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_tables.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build",
+  "command": "/usr/bin/clang++  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -isystem /usr/local/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++17 -o CMakeFiles/VKApp.dir/libs/imgui/imgui_widgets.cpp.o -c /Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_widgets.cpp",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/imgui/imgui_widgets.cpp"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/context.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/context.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/context.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/init.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/init.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/init.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/input.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/input.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/input.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/monitor.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/monitor.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/monitor.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/vulkan.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/vulkan.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/vulkan.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/window.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/window.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/window.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/cocoa_init.m.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/cocoa_init.m",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/cocoa_init.m"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/cocoa_joystick.m.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/cocoa_joystick.m",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/cocoa_joystick.m"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/cocoa_monitor.m.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/cocoa_monitor.m",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/cocoa_monitor.m"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/cocoa_window.m.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/cocoa_window.m",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/cocoa_window.m"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/cocoa_time.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/cocoa_time.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/cocoa_time.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/posix_thread.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/posix_thread.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/posix_thread.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/nsgl_context.m.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/nsgl_context.m",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/nsgl_context.m"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/egl_context.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/egl_context.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/egl_context.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src",
+  "command": "/usr/bin/clang -D_GLFW_USE_CONFIG_H -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src -I/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/src -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -fPIC -Wall -std=gnu99 -o CMakeFiles/glfw.dir/osmesa_context.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/osmesa_context.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/src/osmesa_context.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/wave.dir/wave.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/wave.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/wave.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/wave.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/simple.dir/simple.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/simple.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/simple.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/simple.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/sharing.dir/sharing.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/sharing.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/sharing.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/sharing.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/particles.dir/particles.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/particles.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/particles.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/particles.dir/__/deps/tinycthread.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/tinycthread.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/tinycthread.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/particles.dir/__/deps/getopt.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/particles.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/heightmap.dir/heightmap.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/heightmap.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/heightmap.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/heightmap.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/splitview.dir/splitview.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/splitview.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/splitview.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/splitview.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/offscreen.dir/offscreen.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/offscreen.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/offscreen.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/offscreen.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/gears.dir/gears.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/gears.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/gears.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/gears.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/boing.dir/boing.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/boing.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/examples/boing.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/examples",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/boing.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/triangle-vulkan.dir/triangle-vulkan.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/triangle-vulkan.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/triangle-vulkan.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/triangle-vulkan.dir/__/deps/glad_vulkan.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_vulkan.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_vulkan.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/clipboard.dir/clipboard.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/clipboard.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/clipboard.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/clipboard.dir/__/deps/getopt.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/clipboard.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/title.dir/title.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/title.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/title.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/title.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/timeout.dir/timeout.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/timeout.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/timeout.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/timeout.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/threads.dir/threads.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/threads.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/threads.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/threads.dir/__/deps/tinycthread.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/tinycthread.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/tinycthread.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/threads.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/opacity.dir/opacity.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/opacity.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/opacity.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/opacity.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/gamma.dir/gamma.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/gamma.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/gamma.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/gamma.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/tearing.dir/tearing.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/tearing.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/tearing.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/tearing.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/iconify.dir/iconify.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/iconify.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/iconify.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/iconify.dir/__/deps/getopt.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/iconify.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/joysticks.dir/joysticks.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/joysticks.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/joysticks.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/joysticks.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/windows.dir/windows.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/windows.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/windows.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/windows.dir/__/deps/getopt.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/windows.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/inputlag.dir/inputlag.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/inputlag.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/inputlag.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/inputlag.dir/__/deps/getopt.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/inputlag.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/empty.dir/empty.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/empty.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/empty.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/empty.dir/__/deps/tinycthread.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/tinycthread.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/tinycthread.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/empty.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/reopen.dir/reopen.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/reopen.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/reopen.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/reopen.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/msaa.dir/msaa.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/msaa.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/msaa.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/msaa.dir/__/deps/getopt.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/msaa.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/cursor.dir/cursor.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/cursor.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/cursor.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/cursor.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/glfwinfo.dir/glfwinfo.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/glfwinfo.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/glfwinfo.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/glfwinfo.dir/__/deps/getopt.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/glfwinfo.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/glfwinfo.dir/__/deps/glad_vulkan.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_vulkan.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_vulkan.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/monitors.dir/monitors.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/monitors.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/monitors.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/monitors.dir/__/deps/getopt.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/monitors.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/events.dir/events.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/events.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/events.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/events.dir/__/deps/getopt.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/getopt.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/events.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/icon.dir/icon.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/icon.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/tests/icon.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/glfw-3.3.4/tests",
+  "command": "/usr/bin/clang  -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps -I/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/include -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu99 -o CMakeFiles/icon.dir/__/deps/glad_gl.c.o -c /Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/glfw-3.3.4/deps/glad_gl.c"
+},
+{
+  "directory": "/Users/shabaaz/Desktop/Vulkan/build/libs/tinyobjloader",
+  "command": "/usr/bin/clang++   -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -o CMakeFiles/tinyobjloader.dir/tiny_obj_loader.cc.o -c /Users/shabaaz/Desktop/Vulkan/libs/tinyobjloader/tiny_obj_loader.cc",
+  "file": "/Users/shabaaz/Desktop/Vulkan/libs/tinyobjloader/tiny_obj_loader.cc"
+}
+]

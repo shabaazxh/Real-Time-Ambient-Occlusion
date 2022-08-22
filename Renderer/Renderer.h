@@ -23,7 +23,8 @@ class Renderer {
     public:
     Renderer(Device& deviceRef, SwapChain& swapChainRef, UI& ImGuiUIRef, Window& windowRef, std::vector<VkCommandBuffer> commandBuffers) : 
         deviceRef{deviceRef}, swapChainRef{swapChainRef}, ImGuiUIRef{ImGuiUIRef}, windowRef{windowRef}, commandBuffers{commandBuffers} {
-            MouseControls = &CameraController;
+            mouse_input = &CameraController;
+            recreateSwapchain = false;
         }
     void CreateSync();
     void Renderframe();
@@ -31,6 +32,9 @@ class Renderer {
     void RecordCommandbuffer(uint32_t currentFrame, uint32_t imageIndex);
     void UpdateCamera();
     void DestroyRendererResources();
+
+    bool GetSwapchainState() const { return recreateSwapchain; }
+    void SetRecreateSwapChain(bool value);
     
     
     private:
@@ -50,4 +54,5 @@ class Renderer {
 
     const int MAX_FRAMES_IN_FLIGHT = 2;
     uint32_t currentFrame = 0;
+    bool recreateSwapchain;
 };

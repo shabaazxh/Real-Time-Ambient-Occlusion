@@ -4,7 +4,7 @@ if("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.5)
    message(FATAL_ERROR "CMake >= 2.6.0 required")
 endif()
 cmake_policy(PUSH)
-cmake_policy(VERSION 2.6...3.19)
+cmake_policy(VERSION 2.6...3.18)
 #----------------------------------------------------------------
 # Generated CMake target import file.
 #----------------------------------------------------------------
@@ -45,35 +45,14 @@ unset(_expectedTargets)
 add_library(tinyobjloader STATIC IMPORTED)
 
 set_target_properties(tinyobjloader PROPERTIES
-  INTERFACE_INCLUDE_DIRECTORIES "C:/Users/Shahb/Desktop/pp/libs/tinyobjloader"
+  INTERFACE_INCLUDE_DIRECTORIES "/Users/shabaaz/Desktop/Vulkan/libs/tinyobjloader"
 )
 
 # Import target "tinyobjloader" for configuration "Debug"
 set_property(TARGET tinyobjloader APPEND PROPERTY IMPORTED_CONFIGURATIONS DEBUG)
 set_target_properties(tinyobjloader PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_DEBUG "CXX"
-  IMPORTED_LOCATION_DEBUG "C:/Users/Shahb/Desktop/pp/build/libs/tinyobjloader/Debug/tinyobjloader.lib"
-  )
-
-# Import target "tinyobjloader" for configuration "Release"
-set_property(TARGET tinyobjloader APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
-set_target_properties(tinyobjloader PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
-  IMPORTED_LOCATION_RELEASE "C:/Users/Shahb/Desktop/pp/build/libs/tinyobjloader/Release/tinyobjloader.lib"
-  )
-
-# Import target "tinyobjloader" for configuration "MinSizeRel"
-set_property(TARGET tinyobjloader APPEND PROPERTY IMPORTED_CONFIGURATIONS MINSIZEREL)
-set_target_properties(tinyobjloader PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_MINSIZEREL "CXX"
-  IMPORTED_LOCATION_MINSIZEREL "C:/Users/Shahb/Desktop/pp/build/libs/tinyobjloader/MinSizeRel/tinyobjloader.lib"
-  )
-
-# Import target "tinyobjloader" for configuration "RelWithDebInfo"
-set_property(TARGET tinyobjloader APPEND PROPERTY IMPORTED_CONFIGURATIONS RELWITHDEBINFO)
-set_target_properties(tinyobjloader PROPERTIES
-  IMPORTED_LINK_INTERFACE_LANGUAGES_RELWITHDEBINFO "CXX"
-  IMPORTED_LOCATION_RELWITHDEBINFO "C:/Users/Shahb/Desktop/pp/build/libs/tinyobjloader/RelWithDebInfo/tinyobjloader.lib"
+  IMPORTED_LOCATION_DEBUG "/Users/shabaaz/Desktop/Vulkan/build/libs/tinyobjloader/libtinyobjloader.a"
   )
 
 # This file does not depend on other imported targets which have

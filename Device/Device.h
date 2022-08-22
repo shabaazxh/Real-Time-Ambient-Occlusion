@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <optional>
 #include <set>
+#include <string>
 
 struct QueueFamilyIndices {
     std::optional<uint32_t> graphicsFamily;

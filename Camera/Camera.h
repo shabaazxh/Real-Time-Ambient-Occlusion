@@ -33,10 +33,19 @@ class Camera {
         m_CameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
         m_CameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
     }
+    Camera operator=(const Camera& camera)
+    {
+        this->MouseSettings = camera.MouseSettings;
+        this->m_CameraPos = camera.m_CameraPos;
+        this->m_CameraFront = camera.m_CameraFront;
+        this->m_CameraUp = camera.m_CameraUp;
+    }
+
 
     void MouseControl(GLFWwindow* window, double xOffset, double yOffset);
     void SetCameraPos(glm::vec3 newPosition);
     void SetCameraLock(bool lock);
+
 
     glm::vec3 GetCameraPos()  { return m_CameraPos; }
     glm::vec3 GetCameraFront() { return m_CameraFront; }
@@ -54,8 +63,8 @@ class Camera {
     
 };
 
-inline static Camera* MouseControls;
+inline static Camera* mouse_input;
 static void MouseCallback(GLFWwindow* window, double x, double y) {
-    MouseControls->MouseControl(window, x, y);
+    mouse_input->MouseControl(window, x, y);
 }
 

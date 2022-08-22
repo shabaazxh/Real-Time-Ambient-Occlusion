@@ -36,6 +36,7 @@ class SwapChain {
         }
 
         void CreateSwapChain();
+        void RecreateSwapChain(VkSwapchainKHR oldSwapChain);
         void DestroySwapChain();
         void SetWindow(GLFWwindow* window);
         void SetDevice(Device& deviceRef);

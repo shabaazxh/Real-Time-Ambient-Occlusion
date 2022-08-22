@@ -71,8 +71,8 @@ void main() {
 
     vec3 FragPos = texture(gPosition, uvCoords).rgb;
     vec3 Normal = texture(gNormal, uvCoords).rgb;
-    float AO = texture(AmbientOcclusion, uvCoords).r;
-
+    //float AO = texture(AmbientOcclusion, uvCoords).r;
+    float AO = 0.3;
     float ambientValue = (0.3 * 1.0 * AO);
     vec3 ambient = ambientValue * light.LightColor.xyz;
 
@@ -83,7 +83,7 @@ void main() {
     //specular
     float specularStrength = 0.5; 
     vec4 cameraPosition = vec4(camera.view * light.CameraPosition);   
-    vec3 viewDir = normalize(cameraPosition.xyz - FragPos.xyz);
+    vec3 viewDir = normalize(vec3(0,0,0) - FragPos.xyz);
     vec3 reflectDir = reflect(-lightingDirection, Normal.xyz);
     float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
     vec3 specular = specularStrength * spec * light.LightColor.xyz;

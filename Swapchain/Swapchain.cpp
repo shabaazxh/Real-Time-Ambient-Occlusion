@@ -120,6 +120,68 @@ void SwapChain::CreateSwapChain() {
     CreateSwapChainImageViews();
 }
 
+void SwapChain::RecreateSwapChain(VkSwapchainKHR oldSwapChain)
+{
+        SwapChainSupportInfo swapChainSupportInfo = deviceRef.QuerySwapChainSupport(deviceRef.GetPhysicalDevice());
+    
+    VkSurfaceFormatKHR surfaceFormat = SelectSwapSurfaceFormat(swapChainSupportInfo.formats);
+    VkPresentModeKHR presentMode = SelectSwapPresentMode(swapChainSupportInfo.presentModes);
+    VkExtent2D extent = SelectSwapExtent(swapChainSupportInfo.capabilities);
+
+    // Define amount of images in swapchain. Always use +1 to prevent wait from driver
+    // to complete internal operations
+    uint32_t imageCount = swapChainSupportInfo.capabilities.minImageCount + 1;
+
+    // Ensure we do not exceed max number of images when choosing minImageCount + 1
+    if(swapChainSupportInfo.capabilities.maxImageCount > 0 && imageCount > swapChainSupportInfo.capabilities.maxImageCount){
+        imageCount = swapChainSupportInfo.capabilities.maxImageCount;
+    }
+
+    // Define struct to create swap chain
+    VkSwapchainCreateInfoKHR createInfo{};
+    createInfo.sType = VK_STRUCTURE_TYPE_SWAPCHAIN_CREATE_INFO_KHR;
+    createInfo.surface = m_Surface;
+    createInfo.imageFormat = surfaceFormat.format;
+    createInfo.imageColorSpace = surfaceFormat.colorSpace;
+    createInfo.imageExtent = extent;
+    createInfo.imageArrayLayers = 1;
+    createInfo.imageUsage = VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
+    createInfo.oldSwapchain = oldSwapChain;
+
+    QueueFamilyIndices indices = deviceRef.FindQueueFamilies(deviceRef.GetPhysicalDevice(), m_Surface);
+    uint32_t queueFamilyIndices[] = {indices.graphicsFamily.value(), indices.presentFamily.value()};
+
+    if(indices.graphicsFamily != indices.presentFamily){
+        createInfo.imageSharingMode = VK_SHARING_MODE_CONCURRENT;
+        createInfo.queueFamilyIndexCount = 2;
+        createInfo.pQueueFamilyIndices = queueFamilyIndices;
+    } else {
+        createInfo.imageSharingMode = VK_SHARING_MODE_EXCLUSIVE;
+    }
+
+    createInfo.preTransform = swapChainSupportInfo.capabilities.currentTransform;
+    createInfo.compositeAlpha = VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR;
+    createInfo.presentMode = presentMode;
+    createInfo.clipped = VK_TRUE;
+    createInfo.oldSwapchain = VK_NULL_HANDLE;
+    createInfo.minImageCount = imageCount;
+    
+
+    if(vkCreateSwapchainKHR(deviceRef.GetDevice(), &createInfo, nullptr, &m_SwapChain) != VK_SUCCESS) {
+        throw std::runtime_error("Failed to create a swap chain");
+    }
+
+    // Retrieve swapchain images
+    vkGetSwapchainImagesKHR(deviceRef.GetDevice(), m_SwapChain, &imageCount, nullptr);
+    m_swapChainImages.resize(imageCount);
+    vkGetSwapchainImagesKHR(deviceRef.GetDevice(), m_SwapChain, &imageCount, m_swapChainImages.data());
+
+    m_swapChainImageFormat = surfaceFormat.format;
+    m_swapChainExtent = extent;
+
+    CreateSwapChainImageViews();
+}
+
 VkSurfaceFormatKHR SwapChain::SelectSwapSurfaceFormat(const std::vector<VkSurfaceFormatKHR>& availableFormats) {
 
     // We want to look through the available formats and find

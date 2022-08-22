@@ -34,7 +34,6 @@ void UI::InitImGui(VkDescriptorPool ImGuiDescriptorPool, VkRenderPass renderPass
     EndSingleTimeCommands(deviceRef, commandBuffer, commandPool);
     ImGui_ImplVulkan_DestroyFontUploadObjects();
 }
-
 void UI::drawImGui(std::vector<VkFramebuffer> swapChainFramebuffers, VkExtent2D extent,  uint32_t currentFrame, uint32_t imageIndex) {
         
     ImGui_ImplVulkan_NewFrame();

@@ -29,8 +29,6 @@ void main() {
     //     float SSAOImage = texture(SSAO, uvCoords).r;
     //     SceneImage *= SSAOImage;
     // }
-
-    //vec3 result = SceneLighting * texture(SSAOBlurRender, uvCoords).r;
     vec3 result= SceneImage *= SceneLighting;
     outColor = vec4(SceneLighting, 1.0);
 
