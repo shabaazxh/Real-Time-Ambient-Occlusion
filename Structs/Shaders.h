@@ -119,6 +119,7 @@ struct RenderPresentSettings {
 struct RenderPresentSettingsController {
     inline static bool enableBlur = true;
     inline static bool enableLight = true;
+    inline static glm::vec4 lightPosition = glm::vec4(6.816, 35.0, 11.605, 1.0);
 };
 
 inline float Lerp(float a, float b, float f) {

@@ -50,6 +50,7 @@ void UI::drawImGui(std::vector<VkFramebuffer> swapChainFramebuffers, VkExtent2D 
         ImGui::Text("L to lock camera");
         ImGui::Text("U to unlock camera");
         ImGui::Text("Esc to exit application.");
+        
 
         switch(Settings::AOStateController)
         {
@@ -84,7 +85,13 @@ void UI::drawImGui(std::vector<VkFramebuffer> swapChainFramebuffers, VkExtent2D 
         if(ImGui::RadioButton("HBAO", Settings::AOStateController == Settings::AOState::HBAO)) { Settings::AOStateController = Settings::AOState::HBAO; ImGui::SameLine();}
         if(ImGui::RadioButton("AAO", Settings::AOStateController == Settings::AOState::AAO)) { Settings::AOStateController = Settings::AOState::AAO; ImGui::SameLine();}
         ImGui::Checkbox("Blur", &RenderPresentSettingsController::enableBlur);
-        ImGui::Checkbox("Light", &RenderPresentSettingsController::enableLight);
+        //ImGui::Checkbox("Light", &RenderPresentSettingsController::enableLight);
+
+    
+        ImGui::Text("LightPos:");
+        ImGui::SliderFloat("X", &RenderPresentSettingsController::lightPosition.x, 0, 35.0);
+        ImGui::SliderFloat("Y", &RenderPresentSettingsController::lightPosition.y, 0, 35.0);
+        ImGui::SliderFloat("Z", &RenderPresentSettingsController::lightPosition.z, 0, 35.0);
         ImGui::End();
     }
 

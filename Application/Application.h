@@ -69,10 +69,7 @@ private:
 
     void GenerateSSAONoise(Image& image, VkFormat format, std::vector<glm::vec4>& ssaoNoise, VkCommandPool commandPool, Device& deviceRef);
 
-
 private:
-    std::string path_for_assets;
-
     VkInstance instance;
     Validation validationLayers;
     Primitives primitives;

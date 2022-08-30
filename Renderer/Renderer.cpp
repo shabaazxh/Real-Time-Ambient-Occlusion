@@ -125,7 +125,7 @@ void Renderer::UpdateUniforms(uint32_t currentImage) {
     camera.proj = glm::perspective(glm::radians(45.0f), swapChainRef.GetSwapChainExtent().width / (float) swapChainRef.GetSwapChainExtent().height, 0.1f, 1000.0f);
     camera.proj[1][1] *= -1;
 
-    //(Joey De Vries, 2020) Original implementation uses a hemisphere. My changes make this a sphere kernel
+    //(Joey De Vries, 2020) Original implementation uses a hemisphere. Made changes to make a sphere kernel as done in Crytek's SSAO
     std::uniform_real_distribution<float> randomFloats(0.0, 1.0);
     std::default_random_engine generator;
     std::vector<glm::vec4> ssaoKernel;
@@ -163,21 +163,21 @@ void Renderer::UpdateUniforms(uint32_t currentImage) {
 
     Light Light{};
     //Light.LightPosition = glm::vec4(0.0f, 5.0f, 2.0f, 1.0f);
-    Light.LightPosition = glm::vec4(0.0f, 4.0f, 2.0f, 0.0f);
+    Light.LightPosition = RenderPresentSettingsController::lightPosition;
     Light.LightColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
     Light.ObjectColor = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
-    Light.LightPosition.x = 1.0f + sin(glfwGetTime()) * 2.0f;
-    Light.CameraPosition = glm::vec4(CameraController.GetCameraPos(), 1.0);
+    // Light.LightPosition.x = 1.0f + sin(glfwGetTime()) * 2.0f;
+    // Light.CameraPosition = glm::vec4(CameraController.GetCameraPos(), 1.0);
     //Light.LightPosition.y = sin(glfwGetTime() / 2.0f) * 1.0f;
 
     //glm::mat4 LightProjection = glm::ortho(-10.0f, 10.0f, 10.0f, -10.0f, 1.0f, 7.5f);
-    glm::mat4 LightProjection = glm::perspective(glm::radians(45.0f), 1.0f, 1.0f, 30.0f);
+    glm::mat4 LightProjection = glm::perspective(glm::radians(45.0f), 1.0f, 1.0f, 96.0f);
     glm::mat4 LightView = glm::lookAt(glm::vec3(Light.LightPosition), glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
     Light.LightSpaceMatrix = LightProjection * LightView;
 
     RenderPresentSettings presentSettings{};
     presentSettings.enableBlur = RenderPresentSettingsController::enableBlur;
-    presentSettings.enableLight = RenderPresentSettingsController::enableLight;
+    presentSettings.enableLight = RenderPresentSettingsController::enableLight;    
 
     void* data;
     vkMapMemory(deviceRef.GetDevice(), RenderData::SponzaData.UniformMemory[currentImage], 0, sizeof(camera), 0, &data);

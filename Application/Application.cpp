@@ -11,7 +11,7 @@ void Application::run() {
 // initialise the main window
 void Application::init_window()
 {
-    Window.CreateWindow("Vulkan - Ambient Occlusion");
+    Window.CreateWindow("Vulkan Renderer");
 }
 
 // Set up all render passes 
@@ -139,37 +139,37 @@ void Application::setup_pipelines()
     VkPipelineColorBlendStateCreateInfo GBufferColorBlending = Pipeline::colorBlending(GBufferColorBlendAttachments);
 
     GBufferPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-    GBufferPipeline->CreateGraphicsPipeline("/Users/shabaaz/Desktop/Vulkan/Shaders/GBuffer/gbuffervert.spv", "/Users/shabaaz/Desktop/Vulkan/Shaders/GBuffer/gbufferfrag.spv", inputAssembly, viewport, scissor, rasterizer, multisampling, GBufferColorBlending, GBufferRenderPass->GetRenderpass(), uboDescriptorLayout->GetDescriptorSetLayout(), true);
+    GBufferPipeline->CreateGraphicsPipeline("Shaders/GBuffer/gbuffervert.spv", "Shaders/GBuffer/gbufferfrag.spv", inputAssembly, viewport, scissor, rasterizer, multisampling, GBufferColorBlending, GBufferRenderPass->GetRenderpass(), uboDescriptorLayout->GetDescriptorSetLayout(), true);
 
     SponzaGraphicsPipline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-    SponzaGraphicsPipline->CreateGraphicsPipeline("/Users/shabaaz/Desktop/Vulkan/Shaders/basevert.spv", "/Users/shabaaz/Desktop/Vulkan/Shaders/basefrag.spv", inputAssembly, viewport, scissor, rasterizer, multisampling, colorBlending, SponzaSceneRenderpass->GetRenderpass(), uboDescriptorLayout->GetDescriptorSetLayout(), true);
+    SponzaGraphicsPipline->CreateGraphicsPipeline("Shaders/basevert.spv", "Shaders/basefrag.spv", inputAssembly, viewport, scissor, rasterizer, multisampling, colorBlending, SponzaSceneRenderpass->GetRenderpass(), uboDescriptorLayout->GetDescriptorSetLayout(), true);
 
     std::vector<VkPipelineColorBlendAttachmentState> ssaoBlendState  = {Pipeline::blendState(VK_FALSE, VK_BLEND_FACTOR_ONE, VK_BLEND_FACTOR_ZERO)};
     VkPipelineColorBlendStateCreateInfo ssaocolorBlending = Pipeline::colorBlending(ssaoBlendState);
     SSAOPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-    SSAOPipeline->CreateGraphicsPipeline("/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/SSAOvert.spv", "/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/SSR.frag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
+    SSAOPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/SSAOvert.spv", "Shaders/Postprocessing/SSAOfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
 
     HBAOPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-    HBAOPipeline->CreateGraphicsPipeline("/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/SSAOvert.spv", "/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/HBAO.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
+    HBAOPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/SSAOvert.spv", "Shaders/Postprocessing/HBAO.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
 
     AlchemyPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-    AlchemyPipeline->CreateGraphicsPipeline("/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/SSAOvert.spv", "/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/AlchemyAO.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
+    AlchemyPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/SSAOvert.spv", "Shaders/Postprocessing/AlchemyAO.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAORenderpass->GetRenderpass(), SSAOuboDescriptorLayout->GetDescriptorSetLayout(), true);
 
     SSAOBlurPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-    SSAOBlurPipeline->CreateGraphicsPipeline("/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/Quadvert.spv", "/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/Blur.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAOBlurRenderpass->GetRenderpass(), SSAOBlurDescriptorLayout->GetDescriptorSetLayout(), true);
+    SSAOBlurPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/Quadvert.spv", "Shaders/Postprocessing/Blur.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, ssaocolorBlending, SSAOBlurRenderpass->GetRenderpass(), SSAOBlurDescriptorLayout->GetDescriptorSetLayout(), true);
 
     LightPassPipeline = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-    LightPassPipeline->CreateGraphicsPipeline("/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/Lightingvert.spv", "/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/Lightingfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, colorBlending, LightingPassRenderpass->GetRenderpass(), LightingPassDescriptorLayout->GetDescriptorSetLayout(), true);
+    LightPassPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/Lightingvert.spv", "Shaders/Postprocessing/Lightingfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, colorBlending, LightingPassRenderpass->GetRenderpass(), LightingPassDescriptorLayout->GetDescriptorSetLayout(), true);
 
     VkExtent2D extent = {2048, 2048};
     VkViewport shadowViewport = Pipeline::viewport({2048, 2048});
     VkRect2D shadowScissor = Pipeline::scissor({2048, 2048});
     ShadowPipeline = std::make_unique<Pipeline>(*vkDevice, extent);
-    ShadowPipeline->CreateGraphicsPipeline("/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/Shadow.vert.spv", "/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/Shadow.frag.spv", inputAssembly, shadowViewport, shadowScissor, overlayRasterizer, multisampling, colorBlending, ShadowMapRenderpass->GetRenderpass(), LightingPassDescriptorLayout->GetDescriptorSetLayout(), true);
+    ShadowPipeline->CreateGraphicsPipeline("Shaders/Postprocessing/Shadow.vert.spv", "Shaders/Postprocessing/Shadow.frag.spv", inputAssembly, shadowViewport, shadowScissor, overlayRasterizer, multisampling, colorBlending, ShadowMapRenderpass->GetRenderpass(), LightingPassDescriptorLayout->GetDescriptorSetLayout(), true);
 
     // Display Quad is final swapchain present 
     DisplayQuad = std::make_unique<Pipeline>(*vkDevice, swapChain->GetSwapChainExtent());
-    DisplayQuad->CreateGraphicsPipeline("/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/Quadvert.spv", "/Users/shabaaz/Desktop/Vulkan/Shaders/Postprocessing/Quadfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, colorBlending, SwapChainRenderPass->GetRenderpass(), DisplayDescriptorLayout->GetDescriptorSetLayout(), true);
+    DisplayQuad->CreateGraphicsPipeline("Shaders/Postprocessing/Quadvert.spv", "Shaders/Postprocessing/Quadfrag.spv", inputAssembly, viewport, scissor, overlayRasterizer, multisampling, colorBlending, SwapChainRenderPass->GetRenderpass(), DisplayDescriptorLayout->GetDescriptorSetLayout(), true);
 
     RenderData::SponzaData.pipeline = SponzaGraphicsPipline->GetGraphicsPipeline();
     RenderData::SponzaData.pipelineLayout = SponzaGraphicsPipline->GetPipelineLayout();
@@ -243,7 +243,7 @@ void Application::init_vulkan()
 
     // Buffers
     {
-        Model SponzaModel("/Users/shabaaz/Desktop/Vulkan/Assets/CubeFloor.obj");
+        Model SponzaModel("Assets/Sponza.obj");
         ModelBuffer = std::make_unique<Buffer>(commandPool->GetCommandPool(), *vkDevice);
         ModelBuffer->CreateVertexBuffer(SponzaModel.GetVertexData());
         ModelBuffer->CreateUniformBuffer(sizeof(CameraProjection), swapChain->GetSwapChainImages().size());
