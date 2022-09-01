@@ -45,7 +45,7 @@ void UI::drawImGui(std::vector<VkFramebuffer> swapChainFramebuffers, VkExtent2D 
     if(AOSettingsWindow)
     {
         ImGui::Begin("AOSettings: ", &AOSettingsWindow, 0);
-        //ImGui::Text("Frametime: %f", 1000.0f / ImGui::GetIO().Framerate);
+        ImGui::Text("Frametime: %f", 1000.0f / ImGui::GetIO().Framerate);
         ImGui::Text("WSAD keys to move camera");
         ImGui::Text("L to lock camera");
         ImGui::Text("U to unlock camera");

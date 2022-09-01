@@ -87,6 +87,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="C:\Users\Shahb\Desktop\VulkanRenderer\Structs\vk.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="C:\Users\Shahb\Desktop\VulkanRenderer\Structs\Shaders.h">
       <Filter>Header Files</Filter>
     </ClInclude>

@@ -101,7 +101,6 @@ void Application::setup_image_resources()
 
 void Application::setup_framebuffers()
 {
-    //setup_Render_pass();
     SponzaSceneFramebuffer = std::make_unique<Framebuffer>(*vkDevice);
     SponzaSceneFramebuffer->CreateFramebuffer({SponzaSceneRenderedImage->GetImageView()}, SponzaSceneRenderpass->GetRenderpass(), swapChain->GetSwapChainExtent(), true);
 
@@ -198,7 +197,6 @@ void Application::setup_pipelines()
 void Application::init_vulkan()
 {
     create_instance();  
-    RenderData::GlobalVK.instance = instance;
     Window.CreateSurface(instance);
     Window.LockWindowCamera(false);
     vkDevice->SetSurface(Window.GetSurface());
@@ -235,8 +233,6 @@ void Application::init_vulkan()
 
     ImGuiDescriptorPool = std::make_unique<DescriptorPool>(*vkDevice);
     ImGuiDescriptorPool->CreateDescriptorPool(ImGuiPoolSizes, 1000); 
-
-    RenderData::GlobalVK.commandPool = commandPool->GetCommandPool();
 
     ImGuiUI = std::make_unique<UI>(instance, *vkDevice, Window);
     ImGuiUI->InitImGui(ImGuiDescriptorPool->GetDescriptorPool(), ImGuiRenderpass->GetRenderpass(), commandPool->GetCommandPool());
@@ -315,27 +311,21 @@ void Application::GenerateSSAONoise(Image& image, VkFormat format, std::vector<g
         ssaoNoise.push_back(noise);
     }
 
-    VkBuffer tempStagingBuffer;
-    VkDeviceMemory tempStagingBufferMemory;
-
     Buffer tempBuffer(commandPool, deviceRef);
     tempBuffer.CreateBuffer(noiseImageSize, VK_BUFFER_USAGE_TRANSFER_SRC_BIT, 
-    VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT,
-    tempStagingBuffer, tempStagingBufferMemory);
+    VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT | VK_MEMORY_PROPERTY_HOST_COHERENT_BIT);
 
-    void* data;
-    vkMapMemory(deviceRef.GetDevice(), tempStagingBufferMemory, 0, noiseImageSize, 0, &data);
-    memcpy(data, ssaoNoise.data(), static_cast<size_t>(noiseImageSize));
-    vkUnmapMemory(deviceRef.GetDevice(), tempStagingBufferMemory);
+    tempBuffer.map(noiseImageSize);
+    memcpy(tempBuffer.mapped, ssaoNoise.data(), static_cast<size_t>(noiseImageSize));
+    tempBuffer.unmap();
 
     image.TransitionImageLayout(commandPool, image.GetImage(), format, VK_IMAGE_LAYOUT_UNDEFINED, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL);
 
-    image.CopyBufferToImage(commandPool, tempStagingBuffer, image.GetImage(), 4, 4);
+    image.CopyBufferToImage(commandPool, tempBuffer.GetBuffer(), image.GetImage(), 4, 4);
 
     image.TransitionImageLayout(commandPool, image.GetImage(), format, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL);
 
-    vkDestroyBuffer(deviceRef.GetDevice(), tempStagingBuffer, nullptr);
-    vkFreeMemory(deviceRef.GetDevice(), tempStagingBufferMemory, nullptr);
+    tempBuffer.DestroyBuffer();
 
     VkImageViewCreateInfo imageView =  Image::CreateImageView(image.GetImage(), VK_IMAGE_VIEW_TYPE_2D, VK_FORMAT_R32G32B32A32_SFLOAT, VK_IMAGE_ASPECT_COLOR_BIT);
 
@@ -347,7 +337,7 @@ void Application::GenerateSSAONoise(Image& image, VkFormat format, std::vector<g
 
     image.SetImageView(view);
 
-    tempBuffer.DestroyBuffer();
+    
 }
 // Call events that need to be updated every frame
 void Application::mainLoop() 

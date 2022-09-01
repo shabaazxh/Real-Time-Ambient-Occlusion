@@ -6,6 +6,7 @@
 #include <string>
 #include <memory>
 #include "../Structs/Shaders.h"
+#include "../Resources/Buffer.h"
 
 struct Global {
      VkInstance instance;
@@ -116,6 +117,7 @@ struct Global {
           VkPipelineLayout pipelineLayout;
      };
 
+
     inline static SSAORenderData ssaoRenderData;
     inline static GbufferData GbufferRenderData;
     inline static ModelData SponzaData;
@@ -139,5 +141,6 @@ struct Settings {
      };
      inline static AOState AOStateController;
 };
+
 
 

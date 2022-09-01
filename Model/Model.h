@@ -11,7 +11,7 @@
 #include "../Structs/Shaders.h"
 
 class Model {
-    public:
+public:
     Model(std::string ModelPath) {
         LoadModel(ModelPath);
     }
@@ -19,6 +19,6 @@ class Model {
 
     std::vector<Vertex> GetVertexData() const { return vertices; }
 
-    private:
+private:
     std::vector<Vertex> vertices;
 };

@@ -37,5 +37,4 @@ void Model::LoadModel(std::string ModelPath){
             vertices.push_back(vertex);
         }
     }
-
 }

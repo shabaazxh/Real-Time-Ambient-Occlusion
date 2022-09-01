@@ -10,7 +10,7 @@ find_package(Vulkan)
 include_directories(${VULKAN_INCLUDE_DIRS})
 
 file(GLOB_RECURSE SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp)
-add_executable(VKApp main.cpp Application/Application.cpp Device/Device.cpp Window/Window.cpp Swapchain/Swapchain.cpp Resources/image.cpp
+add_executable(VKApp main.cpp Structs/vk.h Application/Application.cpp Device/Device.cpp Window/Window.cpp Swapchain/Swapchain.cpp Resources/image.cpp
 Resources/FileLoad.cpp Pipelines/Pipelines.cpp Renderpass/Renderpass.cpp Framebuffer/Framebuffer.cpp
 Commands/CommandPool.cpp Commands/Commandbuffer.cpp Renderer/Renderer.cpp Renderer/Semaphore.cpp Structs/Shaders.h ImGui/ImGui.cpp
 Resources/Buffer.cpp Resources/Memory.h Camera/Camera.cpp Renderer/RenderData.h Descriptors/DescriptorLayout.cpp Descriptors/DescriptorPool.cpp

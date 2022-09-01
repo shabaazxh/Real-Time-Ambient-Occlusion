@@ -6,22 +6,6 @@ void SwapChain::SetWindow(GLFWwindow* window){
     m_Window = window;
 }
 
-// void SwapChain::SetDevice(VkDevice device){
-//     m_Device = device;
-// }
-// SwapChain::~SwapChain()
-// {
-//     std::cout << "SWAPCHAIN DESTROYED!" << "\n";
-//     for(auto framebuffer: m_swapChainFramebuffers){
-//         if(framebuffer == VK_NULL_HANDLE)
-//             vkDestroyFramebuffer(deviceRef.GetDevice(), framebuffer, nullptr);
-//     }
-//     for(auto imageView: m_swapChainImageViews){
-//         if(imageView == VK_NULL_HANDLE)
-//             vkDestroyImageView(deviceRef.GetDevice(), imageView, nullptr);
-//     }
-//     vkDestroySwapchainKHR(deviceRef.GetDevice(), m_SwapChain, nullptr);
-// }
 void SwapChain::SetDevice(Device& deviceRef) {
     deviceRef = deviceRef;
 }
@@ -194,7 +178,7 @@ VkSurfaceFormatKHR SwapChain::SelectSwapSurfaceFormat(const std::vector<VkSurfac
         }
     }
 
-    //if we do not find the specified settings we hopedd for, we can just take the first
+    //if we do not find the specified settings we hoped for, we can just take the first
     // available format
     return availableFormats[0];
 }

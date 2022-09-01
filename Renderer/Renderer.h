@@ -21,11 +21,20 @@
 
 class Renderer {
     public:
-    Renderer(Device& deviceRef, SwapChain& swapChainRef, UI& ImGuiUIRef, Window& windowRef, std::vector<VkCommandBuffer> commandBuffers) : 
-        deviceRef{deviceRef}, swapChainRef{swapChainRef}, ImGuiUIRef{ImGuiUIRef}, windowRef{windowRef}, commandBuffers{commandBuffers} {
+    Renderer(Device& deviceRef, 
+            SwapChain& swapChainRef, 
+            UI& ImGuiUIRef, 
+            Window& windowRef, 
+            std::vector<VkCommandBuffer> commandBuffers) : 
+            deviceRef{deviceRef}, 
+            swapChainRef{swapChainRef}, 
+            ImGuiUIRef{ImGuiUIRef}, 
+            windowRef{windowRef}, 
+            commandBuffers{commandBuffers} {
             mouse_input = &CameraController;
             recreateSwapchain = false;
         }
+
     void CreateSync();
     void Renderframe();
     void UpdateUniforms(uint32_t currentImage);
@@ -35,7 +44,6 @@ class Renderer {
 
     bool GetSwapchainState() const { return recreateSwapchain; }
     void SetRecreateSwapChain(bool value);
-    
     
     private:
     void CreateFence();

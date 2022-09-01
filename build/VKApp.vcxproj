@@ -318,6 +318,7 @@ if %errorlevel% neq 0 goto :VCEnd</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\Users\Shahb\Desktop\VulkanRenderer\main.cpp" />
+    <ClInclude Include="C:\Users\Shahb\Desktop\VulkanRenderer\Structs\vk.h" />
     <ClCompile Include="C:\Users\Shahb\Desktop\VulkanRenderer\Application\Application.cpp" />
     <ClCompile Include="C:\Users\Shahb\Desktop\VulkanRenderer\Device\Device.cpp" />
     <ClCompile Include="C:\Users\Shahb\Desktop\VulkanRenderer\Window\Window.cpp" />
