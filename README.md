@@ -3,7 +3,7 @@ The application demos Crytek's SSAO, HBAO and Alchemy AO.
 
 The project is built using Visual Studio Code; the intended enviroment to run the application.
 
-##Prior setup:##
+# Prior setup:
 
 1) https://vulkan.lunarg.com/
    - Download **Vulkan SDK**
@@ -19,7 +19,7 @@ extracted from the provided .zip.
    - CMake Tools. Find and install extesion by Microsoft
 
 
-##Instructions to run the application:##
+# Instructions to run the application:
 
 1) Ensure CMakeLists.txt has run (should happen automatically once extension is installed). 
    To ensure it has run, click the CMakeLists.txt file and press Cntrl-S.
