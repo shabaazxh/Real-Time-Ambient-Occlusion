@@ -1,8 +1,6 @@
 This is a simple Vulkan Renderer developed to demonstrate some popular AO methods used in real-time rendering applications.
 The application demos Crytek's SSAO, HBAO and Alchemy AO.
 
-The project is built using Visual Studio Code; the intended enviroment to run the application.
-
 ## Prior setup:
 
 1) https://vulkan.lunarg.com/
