@@ -59,7 +59,7 @@ void Renderer::UpdateCamera()
     deltaTime = currentFrame - lastFrame;
     lastFrame = currentFrame;
     glm::vec3 right = glm::normalize(glm::cross(CameraController.GetCameraFront(), CameraController.GetCameraUp()));
-    float CameraSpeed = 0.2f * deltaTime;
+    float CameraSpeed = 0.001f * deltaTime;
 
     if(glfwGetKey(windowRef.GetWindow(), GLFW_KEY_W) == GLFW_PRESS){
         CameraController.SetCameraPos(CameraController.GetCameraPos() += CameraSpeed * CameraController.GetCameraFront());
