@@ -1,5 +1,10 @@
-This is a simple Vulkan Renderer developed to demonstrate some popular AO methods used in real-time rendering applications.
+This is a simple C++ Vulkan Renderer developed for my bachelor thesis "Examining the different Ambient Occlusion techniques used in Real-time Rendering" which explores and demonstrates some popular AO methods used in real-time rendering applications.
 The application demos Crytek's SSAO, HBAO and Alchemy AO.
+
+#Features
+* HBAO
+* Crytek SSAO
+* Alchemy AO
 
 ## Setup:
 
@@ -28,3 +33,5 @@ extracted from the provided .zip.
 
 3) Once build is complete, click on the main.cpp file and press *F5*  to launch the application.
    The main.cpp file must be selected to ensure the working directory can correctly navigate to load assets.
+   
+![HBAO](Pictures/HBAO_Capture_render.PNG)
