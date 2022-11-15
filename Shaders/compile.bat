@@ -21,7 +21,4 @@ C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Lighting.frag -o Postprocess
 C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Shadow.vert -o PostProcessing/Shadow.vert.spv
 C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Shadow.frag -o PostProcessing/Shadow.frag.spv
 
-C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/SSRfrag.frag -o PostProcessing/SSR.frag.spv
-C:/VulkanSDK/1.2.176.1/Bin/glslc.exe Postprocessing/Specular.frag -o PostProcessing/Specular.spv
-
 pause
