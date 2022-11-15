@@ -19,7 +19,7 @@ extracted from the provided .zip.
    (extensions can be installed from within Visual Studio Code *(Cntrl+Shift+X)* and search.
    - C/C++ extension. Find and install the extension by Microsoft
    - CMake. Find and install extension by twxs
-   - CMake Tools. Find and install extesion by Microsoft
+   - CMake Tools. Find and install extension by Microsoft
 
 
 ## Run the application:
